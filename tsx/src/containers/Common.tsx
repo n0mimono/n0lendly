@@ -4,6 +4,10 @@ import { CircularProgress } from 'material-ui'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button'
+import Paper from 'material-ui/Paper';
+import Input from 'material-ui/Input'
+import SvgIcon from 'material-ui/SvgIcon'
 
 import * as utility from '../modules/utility'
 
@@ -66,7 +70,8 @@ export const Loading: React.SFC<LoadingProps> = (props) => {
 export const HostHeader: React.SFC<{}> = (props) => {
     let styles: { [key: string]: React.CSSProperties } = {
         bar: {
-            background: "#333"
+            background: "#333",
+            boxShadow: "0px 0px 0px 0px",
         },
         typo: {
         },
@@ -76,9 +81,6 @@ export const HostHeader: React.SFC<{}> = (props) => {
     }
     styles = !utility.issp() ? styles : {
         ...styles,
-        bar: {
-            background: "#333",
-        },
         base: {
             display: "flex",
             justifyContent: "center",
@@ -150,5 +152,123 @@ export const ViewItem: React.SFC<{}> = (props) => {
         <div style={styles.root}>
             {props.children}
         </div>
+    )
+}
+
+interface ButtonProps {
+    onClick: () => void
+    variant?: "raised" | "flat"
+    color?: 'inherit' | 'primary' | 'secondary' | 'default'
+    border?: boolean
+    disabled?: boolean
+    style?: React.CSSProperties
+}
+
+export const BaseButton: React.SFC<ButtonProps> = (props) => {
+    let style: React.CSSProperties = {
+        padding: "10px 20px",
+        border: "solid 2px",
+        borderRadius: "5px",
+    }
+    style = !utility.issp() ? style :
+        {
+            ...style,
+            fontSize: "4vw",
+            padding: "3vw 2vw",
+        }
+    style = Object.assign({ ...style }, props.style)
+
+    if (props.border == false) {
+        style['border'] = ""
+    }
+
+    return (
+        <Button
+            color={props.color}
+            onClick={_ => props.onClick()}
+            style={style}
+            disabled={props.disabled}>
+            {props.children}
+        </Button>
+    )
+}
+
+interface PaperProps {
+    style?: React.CSSProperties
+}
+
+export const BasePaper: React.SFC<PaperProps> = (props) => {
+    let style: React.CSSProperties = {
+        padding: "10px",
+        boxShadow: "0px 0px 0px 0px",
+        border: "solid 1px",
+        borderRadius: "3px",
+        borderColor: "#BBB",
+    }
+    style = !utility.issp() ? style :
+        {
+            ...style,
+           padding: "3vw",
+        }
+    style = Object.assign({ ...style }, props.style)
+
+    return (
+        <Paper style={style}>
+            {props.children}
+        </Paper>
+    )
+}
+
+interface IconProps {
+    style?: React.CSSProperties
+    path: string
+}
+
+export const BaseIcon: React.SFC<IconProps> = (props) => {
+    let style: React.CSSProperties = {
+    }
+    style = !utility.issp() ? style :
+        {
+            ...style,
+            width: 70,
+            height: 70,
+        }
+    style = Object.assign({ ...style }, props.style)
+
+    return (
+        <SvgIcon style={style}><path d={props.path} /></SvgIcon>
+    )
+}
+
+interface InputProps {
+    onChange?: (t: string) => void
+    placeholder?: string
+    value?: string
+    multiline?: boolean
+    rows?: number
+    rowsMax?: number
+    style?: React.CSSProperties
+}
+
+export const BaseInput: React.SFC<InputProps> = (props) => {
+    let style: React.CSSProperties = {
+    }
+    style = !utility.issp() ? style :
+        {
+            ...style,
+            fontSize: "4vw",
+        }
+    style = Object.assign({ ...style }, props.style)
+
+    return (
+        <Input
+            onChange={t => props.onChange(t.target.value)}
+            placeholder={props.placeholder}
+            value={props.value}
+            multiline={props.multiline}
+            rows={props.rows}
+            rowsMax={props.rowsMax}
+            style={style}
+        />
     )
 }

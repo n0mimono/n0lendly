@@ -1,15 +1,14 @@
 import * as React from 'react'
 
 import Typography from 'material-ui/Typography'
-import Button from 'material-ui/Button'
 import Input from 'material-ui/Input'
-import Paper from 'material-ui/Paper';
 import { List, ListItem, Divider } from 'material-ui';
 
 import * as Visit from '../modules/visit'
 import * as utility from '../modules/utility'
 
-import { Loading, Tp, Views, ViewItem } from './Common';
+import { Loading, Tp, Views, ViewItem,
+    BaseButton, BaseInput, BasePaper } from './Common';
 
 interface VisitBaseProps {
     address: string
@@ -61,9 +60,10 @@ const BaseBody: React.SFC<BaseBodyProps> = (props) => {
             padding: "20px 0px 5px 0px"
         },
         inner2: {
+            padding: "10px 0px 25px 0px"
         },
         child: {
-            padding: "30px"
+            padding: "20px"
         },
         typoTitle: {
             fontSize: "20px"
@@ -71,6 +71,9 @@ const BaseBody: React.SFC<BaseBodyProps> = (props) => {
         typeSubTitle: {
             fontSize: "14px",
             whiteSpace: "pre",
+        },
+        divider: {
+            width: "800px",
         }
     }
     styles = !utility.issp() ? styles : {
@@ -78,8 +81,11 @@ const BaseBody: React.SFC<BaseBodyProps> = (props) => {
         inner1: {
             padding: "7vw 0vw 1.5vw 0vw"
         },
+        inner2: {
+            padding: "2vw 0vw 7vw 0vw"
+        },
         child: {
-            padding: "10vw"
+            padding: "3vw"
         },
         typoTitle: {
             fontSize: "7vw"
@@ -87,6 +93,9 @@ const BaseBody: React.SFC<BaseBodyProps> = (props) => {
         typeSubTitle: {
             fontSize: "4.5vw",
             whiteSpace: "pre",
+        },
+        divider: {
+            width: "80vw",
         }
     }
     return (
@@ -102,7 +111,9 @@ const BaseBody: React.SFC<BaseBodyProps> = (props) => {
                         {props.description}
                     </Typography>
                 </div>
-
+                <div>
+                    <Divider style={styles.divider}/>
+                </div>
                 <div style={styles.child}>
                     {props.children}
                 </div>
@@ -156,17 +167,17 @@ const BaseSideButtons: React.SFC<BaseSideButtonsProps> = (props) => {
             {
                 props.onLeftClick == undefined ? "" :
                     <div style={styles.leftClick}>
-                        <Button color="inherit" onClick={_ => props.onLeftClick()} style={styles.leftClickButton}>
+                        <BaseButton color="inherit" border={false} onClick={() => props.onLeftClick()} style={styles.leftClickButton}>
                             {"<"}
-                        </Button>
+                        </BaseButton>
                     </div>
             }
             {
                 props.onRightClick == undefined ? "" :
                     <div style={styles.rightClick}>
-                        <Button color="inherit" onClick={_ => props.onRightClick()} style={styles.rightClickButton}>
+                        <BaseButton color="inherit" border={false} onClick={() => props.onRightClick()} style={styles.rightClickButton}>
                             {">"}
-                        </Button>
+                        </BaseButton>
                     </div>
             }
         </div>
@@ -207,7 +218,6 @@ const SubHeader: React.SFC<{}> = (props) => {
     let styles: { [key: string]: React.CSSProperties } = {
         typo: {
             fontSize: "20px",
-            textDecoration: "underline",
         },
         pad: {
             padding: "10px"
@@ -284,11 +294,11 @@ const SubPaper: React.SFC<SubPaperProps> = (props) => {
                     {props.title}
                 </Typography>
             </div>
-            <Paper style={styles.page}>
+            <BasePaper style={styles.page}>
                 <div style={styles.inner}>
                     {props.children}
                 </div>
-            </Paper>
+            </BasePaper>
         </div>
     )
 }
@@ -302,27 +312,20 @@ export const VisitEnter: React.SFC<VisitEnterProps> = (props) => {
         pad: {
             padding: "10px 0px"
         },
-        button: {
-            padding: "10px 10px",
-        }
     }
     styles = !utility.issp() ? styles : {
         ...styles,
         pad: {
             padding: "3vw 0vw"
         },
-        button: {
-            fontSize: "4vw",
-            padding: "3vw 3vw",
-        }
     }
 
     return (
         <div>
             <div style={styles.pad}></div>
-            <Button variant="raised" color="secondary" onClick={_ => props.onClick()} style={styles.button}>
+            <BaseButton color="secondary" onClick={() => props.onClick()}>
                 Get Started
-            </Button>
+            </BaseButton>
         </div>
     )
 }
@@ -368,10 +371,14 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
             width: "100px",
             padding: "5px",
             color: "#000",
+            display: "flex",
+            justifyContent: "center",
+        },        
+        paper: {
+            padding: "5px 5x",            
         },
         dayDate: {
             padding: "0px 35px",
-            fontWeight: "bold",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -395,15 +402,18 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
     }
     styles = !utility.issp() ? styles : {
         ...styles,
+        paper: {
+            padding: "0vw",
+        },
         hour: {
-            width: "100px",
-            height: "80px",
+            width: "13vw",
+            height: "10vw",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
         },
         item: {
-            fontSize: "34px",
+            fontSize: "4vw",
         }
     }
 
@@ -421,13 +431,14 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
             xHour.push(
                 <div key={j}>
                     <ListItem style={styles.hour}>
-                        <Button color="inherit"
-                            onClick={_ => props.onItemClick(hour.time)}
+                        <BaseButton color="inherit"
+                            onClick={() => props.onItemClick(hour.time)}
+                            border={false}
                             disabled={hour.isReserved}
                             style={styles.item}
                         >
                             {utility.toHourFormat(hour.time)}
-                        </Button>
+                        </BaseButton>
                     </ListItem>
                     <Divider />
                 </div>
@@ -445,12 +456,12 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
         xWeeks.push(
             <div key={i}>
                 <div style={styleDay}>
-                    <Paper>
-                        <div style={styles.paperInner}>
+                    <BasePaper style={styles.paper}>
+                        <div style={styles.inner}>
                             <div style={styles.dayDate}>{xDay}</div>
                             <div style={styles.dayWeek}>{xDw}</div>
                         </div>
-                    </Paper>
+                    </BasePaper>
                 </div>
                 <div style={styles.hours}>
                     <List>
@@ -516,17 +527,17 @@ const CalenderClick: React.SFC<CalenderClickProps> = (props) => {
             {
                 props.onLeftClick == undefined ? "" :
                     <div style={styles.leftClick}>
-                        <Button color="inherit" onClick={_ => props.onLeftClick()} style={styles.leftClickButton}>
+                        <BaseButton color="inherit" border={false} onClick={() => props.onLeftClick()} style={styles.leftClickButton}>
                             {"<"}
-                        </Button>
+                        </BaseButton>
                     </div>
             }
             {
                 props.onRightClick == undefined ? "" :
                     <div style={styles.rightClick}>
-                        <Button color="inherit" onClick={_ => props.onRightClick()} style={styles.rightClickButton}>
+                        <BaseButton color="inherit" border={false} onClick={() => props.onRightClick()} style={styles.rightClickButton}>
                             {">"}
-                        </Button>
+                        </BaseButton>
                     </div>
             }
         </div>
@@ -716,10 +727,6 @@ const ConfirmButton: React.SFC<ConfirmButtonProps> = (props) => {
             color: "#F44",
             padding: "0px 7px",
         },
-        button: {
-            padding: "3vw",
-            fontSize: "4vw"
-        }
     }
 
     return (
@@ -730,10 +737,11 @@ const ConfirmButton: React.SFC<ConfirmButtonProps> = (props) => {
                         {props.message}
                     </div>
                     <div>
-                        <Button variant="raised" color="primary"
-                            onClick={_ => props.onClick()} style={styles.button}>
+                        <BaseButton
+                            color="primary"
+                            onClick={() => props.onClick()}>
                             予定を入れる
-                            </Button>
+                        </BaseButton>
                     </div>
                 </div>
             </Loading>
@@ -819,25 +827,21 @@ export const ResultMore: React.SFC<{}> = (props) => {
         next: {
             padding: "4vw",
         },
-        button: {
-            padding: "3vw",
-            fontSize: "4vw"
-        }
     }
 
     return (
         <div style={styles.root}>
             <div style={styles.next}>
-                <Button variant="raised" color="primary"
-                    onClick={_ => window.location.reload()} style={styles.button}>
+                <BaseButton color="primary"
+                    onClick={() => window.location.reload()}>
                     さらに予約をする
-                </Button>
+                </BaseButton>
             </div>
             <div style={styles.next}>
-                <Button variant="raised" color="primary"
-                    onClick={_ => window.location.href = "/"} style={styles.button}>
+                <BaseButton color="primary"
+                    onClick={() => window.location.href = "/"}>
                     ホストとしてはじめる
-                </Button>
+                </BaseButton>
             </div>
         </div>
     )

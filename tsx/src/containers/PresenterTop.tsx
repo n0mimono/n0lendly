@@ -1,9 +1,7 @@
 import * as React from 'react'
 
-import Button from 'material-ui/Button'
-
 import * as utility from '../modules/utility'
-import { HostHeader } from './Common'
+import { HostHeader, BaseButton } from './Common'
 
 interface PresenterProps {
     onStart: () => void
@@ -16,9 +14,6 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
             justifyContent: "center",
             padding: "80px"
         },
-        button: {
-            padding: "20px",
-        }
     }
     styles = !utility.issp() ? styles : { ...styles,
         root: {
@@ -26,10 +21,6 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
             justifyContent: "center",
             padding: "20vw"
         },
-        button: {
-            fontSize: "4vw",
-            padding: "3vw 3vw",
-        }
     }
 
     return (
@@ -37,9 +28,9 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
             <HostHeader />
             <div style={styles.root}>
                 <div>
-                    <Button variant="raised" color="primary" onClick={_ => props.onStart()} style={styles.button}>
+                    <BaseButton color="primary" onClick={props.onStart} style={styles.button}>
                         GET STARTED
-                    </Button>
+                    </BaseButton>
                 </div>
             </div>
         </div>
