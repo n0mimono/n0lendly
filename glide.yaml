@@ -1,0 +1,7 @@
+package: n0lendly
+import:
+- package: github.com/jinzhu/gorm
+  version: ^1.9.1
+  subpackages:
+  - dialects/postgres
+- package: github.com/lib/pq

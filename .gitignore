@@ -1,0 +1,7 @@
+.vscode
+debug
+
+glide.lock
+vendor/
+
+extra_tool/
