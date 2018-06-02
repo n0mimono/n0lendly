@@ -370,7 +370,7 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
         day: {
             width: "100px",
             padding: "5px",
-            color: "#000",
+            color: "#555",
             display: "flex",
             justifyContent: "center",
         },        
@@ -417,7 +417,7 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
         }
     }
 
-    let weekColors = ['#F44', '#000', '#000', '#000', '#000', '#000', '#44F']
+    let weekColors = ['#F55', '#555', '#555', '#555', '#555', '#555', '#55F']
 
     let xWeeks = []
     for (let i = 0; i < table.days.length; i++) {
