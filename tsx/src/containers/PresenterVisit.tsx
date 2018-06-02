@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Typography from 'material-ui/Typography';
 import { VisitBase, VisitEnter, VisitCalender, VisitConfirm, VisitResult } from './CompVisit';
 
 import * as Visit from '../modules/visit'

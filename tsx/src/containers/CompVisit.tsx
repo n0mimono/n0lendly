@@ -1,14 +1,10 @@
 import * as React from 'react'
 
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import Input from 'material-ui/Input'
-
-import SvgIcon from 'material-ui/SvgIcon'
 import Paper from 'material-ui/Paper';
-import { List, ListItem, Divider, Subheader } from 'material-ui';
+import { List, ListItem, Divider } from 'material-ui';
 
 import * as Visit from '../modules/visit'
 import * as utility from '../modules/utility'

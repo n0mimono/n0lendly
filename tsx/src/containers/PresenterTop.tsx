@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import Button from 'material-ui/Button'
-import Typography from 'material-ui/Typography';
 
 import * as utility from '../modules/utility'
 import { HostHeader } from './Common'
