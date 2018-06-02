@@ -23,6 +23,8 @@ interface PresenterProps {
 export const Presenter: React.SFC<PresenterProps> = (props) => {
     return (
         <div>
+            {
+            props.pages.index == 3 ? undefined :
             <VisitBase
                 address={props.user.address}
                 valid={props.user.exist}
@@ -38,6 +40,7 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
                     undefined
                 }
             />
+            }
             <Views index={props.pages.index}>
                 <ViewItem>
                     <VisitEnter onClick={() => props.onPage1(props.pages.page1)} />
