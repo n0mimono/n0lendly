@@ -1,5 +1,4 @@
 module.exports = {
-    mode: 'development',
     entry: {
       top: __dirname + "/src/top.tsx",
       dashboard: __dirname + "/src/dashboard.tsx",
@@ -21,15 +20,4 @@ module.exports = {
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx']
     },
-    devServer: {
-      contentBase: 'dist',
-      port: 3000,
-      open: true,
-      proxy: {
-        '/api': {
-          target: 'http://localhost:8080',
-          secure: false
-        }
-      }
-    }
   }
