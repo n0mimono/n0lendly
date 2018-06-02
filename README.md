@@ -41,11 +41,13 @@ postgres -D /usr/local/var/postgres
 
 ### エントリーポイント
 
-アプリケーションのエントリーポイントは`main.go`なので、これを起動すれば良い。
+アプリケーションのエントリーポイントは`main.go`
 
 ```
 go run main.go
 ```
+
+でこれを起動する。
 
 ### パッケージ管理
 
@@ -65,7 +67,7 @@ glide update
 
 ## npm
 
-開発時のみ、`n0lendly/tsx`において
+開発時のみ、`n0lendly/tsx`で
 
 ```
 npm install
