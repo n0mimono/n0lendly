@@ -575,7 +575,7 @@ export class VisitConfirm extends React.Component<VisitConfirmProps> {
 
         return (
             <div>
-                <SubHeader>Confirm Infomation</SubHeader>
+                <SubHeader>Confirm Information</SubHeader>
                 <div style={styles.root}>
                     <SubPaper title="予定の日時">
                         <ConfirmForm
