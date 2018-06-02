@@ -234,7 +234,7 @@ const SubHeader: React.SFC<{}> = (props) => {
     }
     return (
         <div>
-            <Typography color="inherit" align="center" style={styles.typo}>
+            <Typography variant="display1" align="center" style={styles.typo}>
                 {props.children}
             </Typography>
             <div style={styles.pad}></div>
