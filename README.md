@@ -2,6 +2,8 @@
 
 Googleカレンダー予約アプリ（仮）
 
+demo: https://n0lendly.herokuapp.com/
+
 ---
 
 # Setup for Mac
