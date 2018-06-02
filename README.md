@@ -83,6 +83,8 @@ npm install
 
 # Heroku
 
-* アプリ本体をpush
-* postgresqlを追加してアプリに紐付ける
-* 環境変数を設定（PORTは設定しない）
+* デプロイ
+    * アプリ本体をpush (go buildpackを利用）
+* その他
+    * postgresqlを追加してアプリに紐付ける
+    * 環境変数を設定（PORTは設定しない）
