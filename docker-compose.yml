@@ -1,0 +1,38 @@
+app:
+  build: .
+  ports:
+    - "8080:8080"
+  links:
+    - postgresql:db
+  volumes:
+    - .:/go/src/n0lendly
+  working_dir: /go/src/n0lendly
+  command: go run main.go
+  environment:
+    PORT: 8080
+    AUTH_CLIENT_ID: ${AUTH_CLIENT_ID}
+    AUTH_CLIENT_SECRET: ${AUTH_CLIENT_SECRET}
+    AUTH_REDIRECT_URI: ${AUTH_REDIRECT_URI}
+    DB_HOST: db
+    DB_PORT: 5432
+    DB_USER: ${DB_USER}
+    DB_NAME: ${DB_NAME}
+    DB_PASSWORD: ${DB_PASSWORD}
+
+postgres-data:
+  image: busybox
+  volumes:
+      - /var/lib/postgresql/data
+  container_name: postgres-datastore
+
+postgresql:
+  image: postgres
+  environment:
+    POSTGRES_USER: ${DB_USER}
+    POSTGRES_PASSWORD: ${DB_PASSWORD}
+    POSTGRES_DB: ${DB_NAME}
+  ports:
+    - "5432:5432"
+  container_name: postgres-db
+  volumes_from:
+      - postgres-data
