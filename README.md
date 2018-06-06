@@ -10,8 +10,6 @@ demo: https://n0lendly.herokuapp.com/
 
 ## 環境変数
 
-環境変数を下記のように設定する。
-
 ```
 # http
 export PORT=8080
@@ -31,8 +29,6 @@ export DB_PASSWORD=dbpassword
 
 ## PostgreSQL
 
-RDBMSとして[PostgreSQL](https://qiita.com/_daisuke/items/13996621cf51f835494b)を使用
-
 ```
 postgres -D /usr/local/var/postgres 
 ```
@@ -41,23 +37,17 @@ postgres -D /usr/local/var/postgres
 
 ### エントリーポイント
 
-アプリケーションのエントリーポイントは`main.go`
-
 ```
 go run main.go
 ```
 
-でこれを起動する。
-
-### パッケージ管理
-
-パッケージ管理として[glide](https://github.com/Masterminds/glide)を使用しているため
+### パッケージ管理（[glide](https://github.com/Masterminds/glide)）
 
 ```
 $GOPATH/src/n0lendly
 ```
 
-というディレクトリに対して
+に対して
 
 ```
 glide update
@@ -84,7 +74,13 @@ npm install
 # Heroku
 
 * デプロイ
-    * アプリ本体をpush (go buildpackを利用）
+    * go buildpackを利用
 * その他
     * postgresqlを追加してアプリに紐付ける
     * 環境変数を設定（PORTは設定しない）
+
+---
+
+# Docker
+
+とくになし
