@@ -370,7 +370,6 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
         day: {
             width: "100px",
             padding: "5px",
-            color: "#555",
             display: "flex",
             justifyContent: "center",
         },        
@@ -399,10 +398,18 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
             justifyContent: "center",
             alignItems: "center",
         },
+        item: {
+        }
     }
     styles = !utility.issp() ? styles : {
         ...styles,
+        day: {
+            padding: "1vw",
+            display: "flex",
+            justifyContent: "center",
+        }, 
         paper: {
+            width: "12vw",
             padding: "0vw",
         },
         hour: {
@@ -417,7 +424,7 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
         }
     }
 
-    let weekColors = ['#F55', '#555', '#555', '#555', '#555', '#555', '#55F']
+    let weekColors = ['#F66', '#555', '#555', '#555', '#555', '#555', '#66F']
 
     let xWeeks = []
     for (let i = 0; i < table.days.length; i++) {

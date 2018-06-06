@@ -16,7 +16,7 @@ import SwipeableViews from 'react-swipeable-views'
 export const Theme: React.SFC<{}> = (props) => {
     let styles: { [key: string]: React.CSSProperties } = {
         root: {
-            color: "#444",
+            color: "#555",
             fontSize: "17px",
             fontWeight: 400,
             fontFamily: "Roboto, Helvetica, Arial sans-serif",
@@ -25,7 +25,7 @@ export const Theme: React.SFC<{}> = (props) => {
     styles = !utility.issp() ? styles : {
         ...styles,
         root: {
-            color: "#444",
+            color: "#555",
             fontSize: "4vw",
             fontWeight: 400,
             fontFamily: "Roboto, Helvetica, Arial sans-serif",
