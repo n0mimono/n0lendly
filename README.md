@@ -83,4 +83,6 @@ npm install
 
 # Docker
 
-とくになし
+```
+docker-compose up
+```
