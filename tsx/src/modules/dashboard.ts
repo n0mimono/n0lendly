@@ -42,6 +42,7 @@ export interface Actions {
     registerAddress: (form: Form) => void
     watchDescription: (form: Form) => void
     registerDescription: (form: Form) => void
+    showPage: (address: string) => void
     logout: () => void
     deleteAccount: () => void
 }

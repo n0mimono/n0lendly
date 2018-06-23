@@ -2,14 +2,14 @@ import * as React from 'react'
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 
-import { AppState } from '../store'
+import { AppState, history } from '../store'
 import * as Dashboard from '../modules/dashboard'
 
 import { MainPage, LinkPage } from './PresenterDashboard'
 import { Loading } from './Common'
 
 import * as utility from '../modules/utility'
-import api, { apiSessionOut, redirect } from '../modules/api'
+import api, { apiSessionOut } from '../modules/api'
 
 // container component
 
@@ -32,6 +32,7 @@ export class Component extends React.Component<Props> {
                         name={props.userData.name}
                         email={props.userData.email}
                         address={props.userData.address}
+                        onShowPage={() => props.showPage(props.userData.address)}
                         onLogout={() => props.logout()}
                         onDeleteAccout={() => props.deleteAccount()}
 
@@ -82,7 +83,7 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
             api('/api/account/', 'GET')
             .then(r => {
                 if (apiSessionOut(r)) {
-                    redirect('/login')
+                    window.location.href = '/login'
                 } else {
                     dispatch(Dashboard.actions.init({
                         address: r.address,
@@ -160,14 +161,17 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
                 }))
             })
         },
+        showPage: (address: string) => {
+            history.push('/' + address)
+        },
         logout: () => {
-            redirect('/logout/')
+            window.location.href = '/logout/'
         },
         deleteAccount: () => {
             api('/api/account/', 'DELETE')
             .then(r => {
                 alert('削除しました。')
-                redirect('/')
+                window.location.href = '/'
             })
         }
     }

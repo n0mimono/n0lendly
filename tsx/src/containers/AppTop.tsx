@@ -2,13 +2,11 @@ import * as React from 'react'
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 
-import { AppState } from '../store'
+import { AppState, history } from '../store'
 import * as Top from '../modules/top'
 
 import { Presenter } from './PresenterTop'
 import { Loading } from './Common'
-
-import api, { apiSessionOut, redirect } from '../modules/api'
 
 // container component
 
@@ -35,7 +33,7 @@ function mapStateToProps(appState: AppState) {
 function mapDispatchToProps(dispatch: Dispatch<void>) {
     return {
         start: () => {
-            redirect('/dashboard/')
+            history.push('/dashboard/')
             dispatch(Top.actions.start())
         },
     }

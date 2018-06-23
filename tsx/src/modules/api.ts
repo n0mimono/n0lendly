@@ -75,7 +75,3 @@ export function apiError(r: any) {
 export function apiSessionOut(r: any) {
     return apiError(r) && r.code == Error.SessionDisConnect
 }
-
-export function redirect(url: string) {
-    window.location.href = url
-}

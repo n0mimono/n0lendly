@@ -35,6 +35,7 @@ interface MainPageProps {
     addressForm: Dashboard.FormInput
     descriotionForm: Dashboard.FormInput
 
+    onShowPage: () => void
     onLogout: () => void
     onDeleteAccout: () => void
 }
@@ -51,8 +52,8 @@ export const MainPage: React.SFC<MainPageProps> = (props) => {
                         <TextClip><Tp>{window.location.host + "/" + props.address}</Tp></TextClip>            
                     </BaseInfoItem>
                     <BaseInfoBtns 
-                        onShowPage={() => window.location.href = "/" + props.address}
-                        onLogout={() => props.onLogout()}
+                        onShowPage={props.onShowPage}
+                        onLogout={props.onLogout}
                     />
                 </Block>
 

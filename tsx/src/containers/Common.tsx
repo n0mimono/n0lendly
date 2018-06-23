@@ -137,7 +137,7 @@ interface ViewsProps {
 
 export const Views: React.SFC<ViewsProps> = (props) => {
     return (
-        <SwipeableViews index={props.index}>
+        <SwipeableViews index={props.index} draggable={false}>
             {props.children}
         </SwipeableViews>
     )
