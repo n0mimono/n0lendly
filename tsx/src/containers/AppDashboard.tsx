@@ -9,7 +9,7 @@ import { MainPage, LinkPage } from './PresenterDashboard'
 import { Loading } from './Common'
 
 import * as utility from '../modules/utility'
-import api from '../modules/api'
+import api, { apiSessionOut, redirect } from '../modules/api'
 
 // container component
 
@@ -81,13 +81,17 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
         init: () => {
             api('/api/account/', 'GET')
             .then(r => {
-                dispatch(Dashboard.actions.init({
-                    address: r.address,
-                    valid: r.address_valid,
-                    name: r.name,
-                    email: r.email,
-                    description: r.description,
-                }))
+                if (apiSessionOut(r)) {
+                    redirect('/login')
+                } else {
+                    dispatch(Dashboard.actions.init({
+                        address: r.address,
+                        valid: r.address_valid,
+                        name: r.name,
+                        email: r.email,
+                        description: r.description,
+                    }))    
+                }
             })
             .catch(e => {
                 dispatch(Dashboard.actions.init({
@@ -157,13 +161,13 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
             })
         },
         logout: () => {
-            window.location.href = '/logout/'
+            redirect('/logout/')
         },
         deleteAccount: () => {
             api('/api/account/', 'DELETE')
             .then(r => {
                 alert('削除しました。')
-                window.location.href = '/'
+                redirect('/')
             })
         }
     }

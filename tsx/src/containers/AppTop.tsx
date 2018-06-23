@@ -8,6 +8,8 @@ import * as Top from '../modules/top'
 import { Presenter } from './PresenterTop'
 import { Loading } from './Common'
 
+import api, { apiSessionOut, redirect } from '../modules/api'
+
 // container component
 
 interface OwnProps {
@@ -33,8 +35,7 @@ function mapStateToProps(appState: AppState) {
 function mapDispatchToProps(dispatch: Dispatch<void>) {
     return {
         start: () => {
-            window.location.href = '/start/'
-
+            redirect('/dashboard/')
             dispatch(Top.actions.start())
         },
     }

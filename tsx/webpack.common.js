@@ -1,13 +1,9 @@
 module.exports = {
-    entry: {
-      top: __dirname + "/src/top.tsx",
-      dashboard: __dirname + "/src/dashboard.tsx",
-      visit: __dirname + "/src/visit.tsx"
-    },
+    entry: __dirname + "/src/index.tsx",
     output: {
       path: __dirname + "/dist/assets",
       publicPath: "/assets",
-      filename: "[name].bundle.js"
+      filename: "bundle.js"
     },
     module: {
       rules: [

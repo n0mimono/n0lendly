@@ -56,3 +56,26 @@ export async function apiWithCache(url: string, method: string, q?: any) {
 
     return cache[key]
 }
+
+export const Error = {
+    Unknown: 2000,
+    JsonMarshal: 2001,
+    TemplateExecute: 2002,
+    TemplateParse: 2003,
+    SessionDisConnect: 2004,
+    InvalidURI: 2005,
+    InvalidQuery: 2006,
+    InvalidMethod: 2007,
+}
+
+export function apiError(r: any) {
+    return r != undefined && r.code != undefined
+}
+
+export function apiSessionOut(r: any) {
+    return apiError(r) && r.code == Error.SessionDisConnect
+}
+
+export function redirect(url: string) {
+    window.location.href = url
+}

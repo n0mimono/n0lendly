@@ -14,6 +14,10 @@ import (
 	"strconv"
 )
 
+func indexFileName() string {
+	return "index.html"
+}
+
 func src(filename string) string {
 	return "tsx/dist/" + filename
 }
@@ -73,21 +77,6 @@ func getError(code int) map[string]interface{} {
 		"error": name,
 		"code":  code,
 		"msg":   msg,
-	}
-}
-
-func getErrorNameAndMessage(code int) (string, string) {
-	switch code {
-	case domain.ErrorUnknown:
-		return "Unknown", "Unknown error."
-	case domain.ErrorJsonMarshal:
-		return "Json", "Json encoding error."
-	case domain.ErrorTemplateExecute:
-		return "Template", "Template execute error."
-	case domain.ErrorTemplateParse:
-		return "Template", "Template parse error."
-	default:
-		return "Unknown", "Unknown error."
 	}
 }
 
