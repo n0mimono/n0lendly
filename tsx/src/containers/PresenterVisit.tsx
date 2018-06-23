@@ -40,7 +40,7 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
                 }
             />
             }
-            <Views index={props.pages.index}>
+            <Views index={props.pages.index} valid={props.user.exist}>
                 <ViewItem>
                     <VisitEnter onClick={() => props.onPage1(props.pages.page1)} />
                 </ViewItem>

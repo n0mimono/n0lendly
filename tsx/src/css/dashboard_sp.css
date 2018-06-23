@@ -1,0 +1,98 @@
+/* ---------------------------------------- */
+
+.linkBlock {
+    display: flex;
+    justify-content: center;
+}
+
+.linkDescription {
+    padding: 20vw 0vw 10vw 0vw;
+}
+
+.linkDescription .typo {
+    font-size: 7vw;
+}
+
+.linkUpdate {
+    display: flex;
+}
+
+.linkUpdate .outer1 {
+    padding: 0vw 3vw 0vw 0vw;
+}
+
+.linkUpdate .input {
+    width: 80vw;
+}
+
+.linkUpdate .outer2 {
+    padding: 2vw 0vw 1vw 0vw;
+}
+
+.linkUpdate .helper {
+    padding: 0vw 0vw 2vw 0vw;
+    color: #888;
+}
+
+.block {
+    display: list-item !important;
+    padding: 2vw 1vw 1vw 1vw;
+}
+
+.block .mid1 {
+    padding: 0vw 4vw;
+    font-size: 7vw;
+    font-weight: 600;
+}
+
+.block .mid2 {
+    padding: 3vw;
+}
+
+.block .inner {
+    padding: 3vw;
+}
+
+.miniBlock {
+    padding: 1vw;
+}
+
+.miniBlock .title {
+    padding: 1vw 0vw;
+    font-weight: 600;
+}
+
+.baseInfoItem {
+    display: flex;
+    align-items: center;
+    padding: 1vw 1vw;
+}
+
+.baseInfoItem .outer {
+    padding: 1vw 1vw 0vw 0vw;
+}
+
+.textClip {
+    display: flex;
+    align-items: center;
+}
+
+.textClip .icon {
+    top: 0;
+    border: initial;
+}
+
+.baseInfoBtn {
+    padding: 2vw 0vw;
+    display: flex;
+}
+
+.baseInfoBtn .sub1 {
+    padding: 0vw 3vw 0vw 1vw
+}
+
+.accountDelete {
+
+}
+
+/* ---------------------------------------- */

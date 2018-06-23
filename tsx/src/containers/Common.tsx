@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { CircularProgress } from 'material-ui'
+import { CircularProgress, Divider } from 'material-ui'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
@@ -13,26 +13,15 @@ import * as utility from '../modules/utility'
 
 import SwipeableViews from 'react-swipeable-views'
 
+import styles from './styles'
+
+interface CustomProps {
+    className: string
+}
+
 export const Theme: React.SFC<{}> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            color: "#555",
-            fontSize: "17px",
-            fontWeight: 400,
-            fontFamily: "Roboto, Helvetica, Arial sans-serif",
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        root: {
-            color: "#555",
-            fontSize: "4vw",
-            fontWeight: 400,
-            fontFamily: "Roboto, Helvetica, Arial sans-serif",
-        }
-    }
     return (
-        <div style={styles.root}>
+        <div className={styles.common.theme}>
             {props.children}
         </div>
     )
@@ -43,17 +32,7 @@ interface LoadingProps {
 }
 
 export const Loading: React.SFC<LoadingProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            display: "flex",
-            justifyContent: "center",
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-    }
     let size = !utility.issp() ? undefined : 180
-
     if (props.isReady) {
         return (
             <div>
@@ -62,7 +41,7 @@ export const Loading: React.SFC<LoadingProps> = (props) => {
         )
     } else {
         return (
-            <div style={styles.root}>
+            <div className={styles.common.loading}>
                 <CircularProgress size={size} color="inherit" />
             </div>
         )
@@ -70,42 +49,16 @@ export const Loading: React.SFC<LoadingProps> = (props) => {
 }
 
 export const HostHeader: React.SFC<{}> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        bar: {
-            background: "#333",
-            boxShadow: "0px 0px 0px 0px",
-        },
-        typo: {
-        },
-        pad: {
-            padding: "30px"
-        }
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        base: {
-            display: "flex",
-            justifyContent: "center",
-            padding: "1vw",
-        },
-        typo: {
-            fontSize: "10vw",
-        },
-        pad: {
-            padding: "8vw"
-        }
-    }
-
     return (
-        <div>
-            <AppBar style={styles.bar}>
-                <Toolbar style={styles.base}>
-                    <Typography variant="title" color="inherit" style={styles.typo}>
+        <div className={styles.common.hostHeader}>
+            <AppBar className={styles.common.bar}>
+                <Toolbar className={styles.common.base}>
+                    <Typography variant="title" color="inherit" className={styles.common.typo}>
                         {utility.AppName()}
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <div style={styles.pad}>
+            <div className={styles.common.pad}>
             </div>
         </div>
     )
@@ -115,17 +68,8 @@ interface TpProps {
 }
 
 export const Tp: React.SFC<TpProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            padding: "5px 10px"
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-    }
-
     return (
-        <div style={styles.root}>
+        <div className={styles.common.tp}>
             {props.children}
         </div>
     )
@@ -133,25 +77,31 @@ export const Tp: React.SFC<TpProps> = (props) => {
 
 interface ViewsProps {
     index: number
+    valid: boolean
 }
 
 export const Views: React.SFC<ViewsProps> = (props) => {
+    /*
     return (
-        <SwipeableViews index={props.index} draggable={false}>
+        <div>
+        {
+            !props.valid ? "" :
+                <SwipeableViews index={props.index} draggable={false}>
+                    {props.children}
+                </SwipeableViews>
+        }
+        </div>
+    )*/
+    return (
+        <div>
             {props.children}
-        </SwipeableViews>
+        </div>
     )
 }
 
 export const ViewItem: React.SFC<{}> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            display: "flex",
-            justifyContent: "center",
-        },
-    }
     return (
-        <div style={styles.root}>
+        <div className={styles.common.viewItem}>
             {props.children}
         </div>
     )
@@ -159,86 +109,59 @@ export const ViewItem: React.SFC<{}> = (props) => {
 
 interface ButtonProps {
     onClick: () => void
-    variant?: "raised" | "flat"
     color?: 'inherit' | 'primary' | 'secondary' | 'default'
     border?: boolean
     disabled?: boolean
-    style?: React.CSSProperties
 }
 
 export const BaseButton: React.SFC<ButtonProps> = (props) => {
-    let style: React.CSSProperties = {
-        padding: "10px 20px",
-        border: "solid 2px",
-        borderRadius: "5px",
-    }
-    style = !utility.issp() ? style :
-        {
-            ...style,
-            fontSize: "4vw",
-            padding: "3vw 2vw",
-        }
-    style = Object.assign({ ...style }, props.style)
+    let cs = props.border == false ? 'baseButtonFlat' : 'baseButton'
+    return (
+        <CustomButton
+            color={props.color}
+            onClick={props.onClick}
+            className={styles.common[cs]}
+            disabled={props.disabled}>
+            {props.children}
+        </CustomButton>
+    )
+}
 
-    if (props.border == false) {
-        style['border'] = ""
-    }
-
+export const CustomButton: React.SFC<ButtonProps & CustomProps> = (props) => {
     return (
         <Button
             color={props.color}
             onClick={_ => props.onClick()}
-            style={style}
+            className={props.className}
             disabled={props.disabled}>
             {props.children}
         </Button>
     )
 }
 
-interface PaperProps {
-    style?: React.CSSProperties
+export const BasePaper: React.SFC<{}> = (props) => {
+    return (
+        <CustomPaper className={styles.common.basePaper}>
+            {props.children}
+        </CustomPaper>
+    )
 }
 
-export const BasePaper: React.SFC<PaperProps> = (props) => {
-    let style: React.CSSProperties = {
-        padding: "10px",
-        boxShadow: "0px 0px 0px 0px",
-        border: "solid 1px",
-        borderRadius: "3px",
-        borderColor: "#BBB",
-    }
-    style = !utility.issp() ? style :
-        {
-            ...style,
-           padding: "3vw",
-        }
-    style = Object.assign({ ...style }, props.style)
-
+export const CustomPaper: React.SFC<CustomProps> = (props) => {
     return (
-        <Paper style={style}>
+        <Paper className={props.className}>
             {props.children}
         </Paper>
     )
 }
 
 interface IconProps {
-    style?: React.CSSProperties
     path: string
 }
 
 export const BaseIcon: React.SFC<IconProps> = (props) => {
-    let style: React.CSSProperties = {
-    }
-    style = !utility.issp() ? style :
-        {
-            ...style,
-            width: 70,
-            height: 70,
-        }
-    style = Object.assign({ ...style }, props.style)
-
     return (
-        <SvgIcon style={style}><path d={props.path} /></SvgIcon>
+        <SvgIcon className={styles.common.baseIcon}><path d={props.path} /></SvgIcon>
     )
 }
 
@@ -249,19 +172,23 @@ interface InputProps {
     multiline?: boolean
     rows?: number
     rowsMax?: number
-    style?: React.CSSProperties
 }
 
 export const BaseInput: React.SFC<InputProps> = (props) => {
-    let style: React.CSSProperties = {
-    }
-    style = !utility.issp() ? style :
-        {
-            ...style,
-            fontSize: "4vw",
-        }
-    style = Object.assign({ ...style }, props.style)
+    return (
+        <CustomInput
+            onChange={props.onChange}
+            placeholder={props.placeholder}
+            value={props.value}
+            multiline={props.multiline}
+            rows={props.rows}
+            rowsMax={props.rowsMax}
+            className={styles.common.baseInput}
+        />
+    )
+}
 
+export const CustomInput: React.SFC<InputProps & CustomProps> = (props) => {
     return (
         <Input
             onChange={t => props.onChange(t.target.value)}
@@ -270,7 +197,7 @@ export const BaseInput: React.SFC<InputProps> = (props) => {
             multiline={props.multiline}
             rows={props.rows}
             rowsMax={props.rowsMax}
-            style={style}
+            className={props.className}
         />
     )
 }

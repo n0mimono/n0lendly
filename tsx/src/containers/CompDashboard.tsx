@@ -7,19 +7,11 @@ import { Tp, BaseButton, BasePaper, BaseIcon, BaseInput } from './Common'
 import * as utility from '../modules/utility'
 import * as Dashboard from '../modules/dashboard'
 
-export const LinkBlock: React.SFC<{}> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            display: "flex",
-            justifyContent: "center"
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-    }
+import styles from './styles'
 
+export const LinkBlock: React.SFC<{}> = (props) => {
     return (
-        <div style={styles.root}>
+        <div className={styles.dashboard.linkBlock}>
             <div>
                 {props.children}
             </div>
@@ -28,27 +20,9 @@ export const LinkBlock: React.SFC<{}> = (props) => {
 }
 
 export const LinkDescription: React.SFC<{}> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            padding: "60px 0px 30px 0px"
-        },
-        typo: {
-            fontSize: "20px"
-        }
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        root: {
-            padding: "20vw 0vw 10vw 0vw"
-        },
-        typo: {
-            fontSize: "7vw"
-        }
-    }
-
     return (
-        <div style={styles.root}>
-            <Typography variant="display1" align="center" style={styles.typo}>
+        <div className={styles.dashboard.linkDescription}>
+            <Typography variant="display1" align="center" className={styles.dashboard.typo}>
                 アドレスを入力する
             </Typography>
         </div>
@@ -60,66 +34,10 @@ interface LinkUpdateProps {
 }
 
 export const LinkUpdate: React.SFC<LinkUpdateProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            display: "flex"
-        },
-        outer1: {
-            padding: "0px 10px 0px 0px"
-        },
-        input: {
-        },
-        outer2: {
-        },
-        helper: {
-            padding: "10px 0px",
-            color: "#888"
-        }
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        root: {
-        },
-        outer1: {
-            padding: "0vw 3vw 0vw 0vw"
-        },
-        input: {
-            width: "80vw",
-        },
-        outer2: {
-            padding: "2vw 0vw 1vw 0vw",
-        },
-        helper: {
-            padding: "0vw 0vw 2vw 0vw",
-            color: "#888"
-        }
-    }
-
-    if (!props.form.isShort) {
-        if (!utility.issp()) {
-            styles = {
-                ...styles,
-                input: {
-                    ...styles.input,
-                    width: "320px",
-                },
-                button: {
-                    ...styles.button,
-                    top: "80px",
-                    right: "100px",
-                },
-                outer2: {
-                    ...styles.outer2,
-                    padding: "0px 0px 60px 0px",
-                },
-            }    
-        }
-    }
-
     return (
         <div>
-            <div style={styles.root}>
-                <div style={styles.outer1}>
+            <div className={styles.dashboard.linkUpdate}>
+                <div className={styles.dashboard.outer1}>
                     <BaseInput
                         onChange={t => props.form.onChange(t)}
                         placeholder={"input me"}
@@ -127,19 +45,18 @@ export const LinkUpdate: React.SFC<LinkUpdateProps> = (props) => {
                         multiline={!props.form.isShort}
                         rows={3}
                         rowsMax={3}
-                        style={styles.input}
                     />
                 </div>
-                <div style={styles.outer2}>
+                <div className={styles.dashboard.outer2}>
                     <BaseButton
                         color="primary"
                         onClick={() => props.form.onEnter(props.form.value)}
-                        style={styles.button} >
+                    >
                         登録する
                     </BaseButton>
                 </div>
             </div>
-            <div style={styles.helper}>
+            <div className={styles.dashboard.helper}>
                 {props.form.helper}
             </div>
         </div>
@@ -159,48 +76,12 @@ export const Blocks: React.SFC<{}> = (props) => {
 }
 
 export const Block: React.SFC<BlockProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        outer: {
-            display: "list-item",
-            padding: "30px 5px 10px 5px",
-        },
-        mid1: {
-            padding: "0px 12px",
-            fontSize: "22px",
-            fontWeight: 600,
-        },
-        mid2: {
-            padding: "10px",
-        },
-        inner: {
-            padding: "10px",
-        }
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        outer: {
-            display: "list-item",
-            padding: "2vw 1vw 1vw 1vw",
-        },
-        mid1: {
-            padding: "0vw 4vw",
-            fontSize: "7vw",
-            fontWeight: 600,
-        },
-        mid2: {
-            padding: "3vw",
-        },
-        inner: {
-            padding: "3vw",
-        }
-    }
-
     return (
-        <ListItem style={styles.outer}>
-            <div style={styles.mid1}>
+        <ListItem className={styles.dashboard.block}>
+            <div className={styles.dashboard.mid1}>
                 {props.title}
             </div>
-            <div style={styles.mid2}>
+            <div className={styles.dashboard.mid2}>
                 <BasePaper>
                     {props.children}
                 </BasePaper>
@@ -214,29 +95,9 @@ interface MiniBlockProps {
 }
 
 export const MiniBlock: React.SFC<MiniBlockProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            padding: "10px 10px",
-        },
-        title: {
-            padding: "10px 0px",
-            fontWeight: 600,
-        }
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        root: {
-            padding: "1vw",
-        },
-        title: {
-            padding: "1vw 0vw",
-            fontWeight: 600,
-        }
-    }
-
     return (
-        <div style={styles.root}>
-            <div style={styles.title}>
+        <div className={styles.dashboard.miniBlock}>
+            <div className={styles.dashboard.title}>
                 {props.title}
             </div>
             <div>
@@ -247,31 +108,9 @@ export const MiniBlock: React.SFC<MiniBlockProps> = (props) => {
 }
 
 export const BaseInfoItem: React.SFC<{}> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            display: "flex",
-            alignItems: "center",
-            padding: "10px 0px"
-        },
-        outer: {
-            padding: "3px 5px 0px 0px"
-        }
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        root: {
-            display: "flex",
-            alignItems: "center",
-            padding: "1vw 1vw"
-        },
-        outer: {
-            padding: "1vw 1vw 0vw 0vw",
-        },
-    }
-
     return (
-        <div style={styles.root}>
-            <div style={styles.outer}>
+        <div className={styles.dashboard.baseInfoItem}>
+            <div className={styles.dashboard.outer}>
                 <BaseIcon path={"M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"} />
             </div>
             <div>
@@ -281,9 +120,13 @@ export const BaseInfoItem: React.SFC<{}> = (props) => {
     )
 }
 
-export const TextClip: React.SFC<{}> = (props) => {
+interface TextClipProps {
+    url: string
+}
+
+export const TextClip: React.SFC<TextClipProps> = (props) => {
     let onClip = () => {
-        let text = props.children as string
+        let text = props.url
 
         let tmp = document.createElement('div')
         tmp.appendChild(document.createElement('pre')).textContent = text
@@ -294,29 +137,17 @@ export const TextClip: React.SFC<{}> = (props) => {
         document.execCommand('copy')
         document.body.removeChild(tmp)
     }
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            display: "flex",
-            alignItems: "center",
-        },
-        icon: {
-            top: 0,
-            border: "",
-        }
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-    }
+
     let size = !utility.issp() ? 20 : 60
     let description = !utility.issp() ? "クリップボードにコピー>" : ""
 
     return (
-        <div style={styles.root}>
+        <div className={styles.dashboard.textClip}>
             <div>
                 {props.children}
             </div>
             <div>
-                <BaseButton variant="flat" color="inherit" onClick={() => onClip()} style={styles.icon}>
+                <BaseButton color="inherit" onClick={() => onClip()} border={false}>
                     {description} <img src="/imgs/clip.png" width={size} height={size} />
                 </BaseButton>
             </div>
@@ -330,29 +161,9 @@ interface BaseInfoBtnsProps {
 }
 
 export const BaseInfoBtns: React.SFC<BaseInfoBtnsProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            padding: "10px 0px",
-            display: "flex"
-        },
-        sub1: {
-            padding: "0px 10px 0px 0px"
-        }
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        root: {
-            padding: "2vw 0vw",
-            display: "flex"
-        },
-        sub1: {
-            padding: "0vw 3vw 0vw 1vw"
-        },
-    }
-
     return (
-        <div style={styles.root}>
-            <div style={styles.sub1}>
+        <div className={styles.dashboard.baseInfoBtn}>
+            <div className={styles.dashboard.sub1}>
                 <BaseButton color="secondary" onClick={() => props.onShowPage()}>
                     リンクページの表示
                 </BaseButton>
@@ -371,11 +182,6 @@ interface AccountDeleteProps {
 }
 
 export const AccountDelete: React.SFC<AccountDeleteProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-    }
     return (
         <div>
             <BaseButton color="primary" onClick={() => props.onEnter()}>

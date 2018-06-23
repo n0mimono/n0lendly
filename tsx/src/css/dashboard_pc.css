@@ -1,0 +1,98 @@
+/* ---------------------------------------- */
+
+.linkBlock {
+    display: flex;
+    justify-content: center;
+}
+
+.linkDescription {
+    padding: 60px 0px 30px 0px;
+}
+
+.linkDescription .typo {
+    font-size: 20px;
+}
+
+.linkUpdate {
+    display: flex;
+}
+
+.linkUpdate .outer1 {
+    padding: 0px 10px 0px 0px;
+}
+
+.linkUpdate .input {
+
+}
+
+.linkUpdate .outer2 {
+
+}
+
+.linkUpdate .helper {
+    padding: 10px 0px;
+    color: #888;
+}
+
+.block {
+    display: list-item !important;
+    padding: 30px 5px 10px 5px;
+}
+
+.block .mid1 {
+    padding: 0px 12px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.block .mid2 {
+    padding: 10px;
+}
+
+.block .inner {
+    padding: 10px;
+}
+
+.miniBlock {
+    padding: 10px 10px;
+}
+
+.miniBlock .title {
+    padding: 10px 0px;
+    font-weight: 600;
+}
+
+.baseInfoItem {
+    display: flex;
+    align-items: center;
+    padding: 10px 0px
+}
+
+.baseInfoItem .outer {
+    padding: 3px 5px 0px 0px;
+}
+
+.textClip {
+    display: flex;
+    align-items: center;
+}
+
+.textClip .icon {
+    top: 0;
+    border: initial;
+}
+
+.baseInfoBtn {
+    padding: 10px 0px;
+    display: flex;
+}
+
+.baseInfoBtn .sub1 {
+    padding: 0px 10px 0px 0px
+}
+
+.accountDelete {
+
+}
+
+/* ---------------------------------------- */

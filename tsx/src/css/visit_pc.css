@@ -1,0 +1,239 @@
+/* ---------------------------------------- */
+
+.baseBody {
+    display: flex;
+    justify-content: center;
+}
+
+.baseBody .inner1 {
+    padding: 20px 0px 5px 0px;
+}
+
+.baseBody .inner2 {
+    padding: 10px 0px 25px 0px;
+}
+
+.baseBody .child {
+    padding: 20px;
+}
+
+.baseBody .typoTitle {
+    font-size: 20px;
+}
+
+.baseBody .typeSubTitle {
+    font-size: 14px;
+    white-space: pre;
+}
+
+.baseBody .divider {
+    width: 800px
+}
+
+.baseSide .left {
+    width: 0;
+    height: 0;
+}
+
+.baseSide .left .button {
+    padding: 10px 10px;
+    top: 40px;
+    left: 20;    
+}
+
+.baseSide .right {
+    height: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.baseSide .right .button {
+    padding: 10px 10px;
+    top: 40px;
+    right: 20;
+}
+
+.baseNotFound {
+    display: flex;
+    justify-content: center;
+}
+
+.baseNotFound .inner {
+    padding: 50px;
+}
+
+.baseNotFound .typo {
+}
+
+.subHeader .typo {
+    font-size: 20px;
+}
+
+.subHeader .pad {
+    padding: 10px;
+}
+
+.subPaper {
+    padding: 10px;
+}
+
+.subPaper .head {
+    padding: 0px 0px 10px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.subPaper .title {
+    font-size: 18px;
+}
+
+.subPaper .paper {
+    width: 330px;
+    height: 330px;
+}
+
+.subPaper .inner {
+    padding: 10px;
+}
+
+.enter .pad {
+    padding: 10px 0px
+}
+
+/* ---------------------------------------- */
+
+.calenderBody {
+    display: flex;
+}
+
+.calenderBody .day {
+    width: 100px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.calenderBody .paper {
+    box-shadow: 0px 0px 0px 0px !important;
+    border: solid 1px !important;
+    border-radius: 3px !important;
+    border-color: #BBB !important;
+}
+
+.calenderBody .dayDate {
+    padding: 0px 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calenderBody .dayWeek {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calenderBody .hours {
+    display: flex;
+    justify-content: center;
+}
+
+.calenderBody .hour {
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calenderBody .item {
+}
+
+.calenderBody .sunday {
+    color: #F66;
+}
+
+.calenderBody .saturday {
+    color: #66F;
+}
+
+.calenderBody .weekday {
+}
+
+.calenderClick .left {
+    width: 0;
+    height: 0;
+}
+
+.calenderClick .left .button {
+    padding: 10px 10px;
+    top: -40px;
+    left: 0px;
+}
+
+.calenderClick .right {
+    height: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.calenderClick .right .button {
+    padding: 10px 10px;
+    top: -40px;
+    right: 0px;
+}
+
+/* ---------------------------------------- */
+
+.confirm {
+    display: flex
+}
+
+.confirmForm {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.confirmForm .name {
+    width: 80px;
+}
+
+.confirmForm .form {
+    display: flex;
+}
+
+.confirmForm .input {
+}
+
+.confirmButton {
+    padding: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.confirmButton .comp {
+    display: flex;
+    align-items: center;
+}
+
+.confirmButton .message {
+    color: #F44;
+    padding: 0px 7px;
+}
+
+.result {
+    padding: 45px;
+    display: flex;
+    justify-content: center;
+}
+
+.result .sub {
+    display: flex;
+}
+
+.resultMore .next {
+    padding: 12px;
+}
+
+/* ---------------------------------------- */

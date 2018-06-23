@@ -3,32 +3,19 @@ import * as React from 'react'
 import * as utility from '../modules/utility'
 import { HostHeader, BaseButton } from './Common'
 
+import styles from './styles'
+
 interface PresenterProps {
     onStart: () => void
 }
 
 export const Presenter: React.SFC<PresenterProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            display: "flex",
-            justifyContent: "center",
-            padding: "80px"
-        },
-    }
-    styles = !utility.issp() ? styles : { ...styles,
-        root: {
-            display: "flex",
-            justifyContent: "center",
-            padding: "20vw"
-        },
-    }
-
     return (
         <div>
             <HostHeader />
-            <div style={styles.root}>
+            <div className={styles.top.root}>
                 <div>
-                    <BaseButton color="primary" onClick={props.onStart} style={styles.button}>
+                    <BaseButton color="primary" onClick={props.onStart}>
                         GET STARTED
                     </BaseButton>
                 </div>

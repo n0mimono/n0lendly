@@ -7,8 +7,12 @@ import { List, ListItem, Divider } from 'material-ui';
 import * as Visit from '../modules/visit'
 import * as utility from '../modules/utility'
 
-import { Loading, Tp, Views, ViewItem,
-    BaseButton, BaseInput, BasePaper } from './Common';
+import {
+    Loading, BaseButton,
+    CustomPaper, CustomButton, CustomInput
+} from './Common';
+
+import styles from './styles'
 
 interface VisitBaseProps {
     address: string
@@ -51,70 +55,23 @@ interface BaseBodyProps {
 }
 
 const BaseBody: React.SFC<BaseBodyProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            display: "flex",
-            justifyContent: "center",
-        },
-        inner1: {
-            padding: "20px 0px 5px 0px"
-        },
-        inner2: {
-            padding: "10px 0px 25px 0px"
-        },
-        child: {
-            padding: "20px"
-        },
-        typoTitle: {
-            fontSize: "20px"
-        },
-        typeSubTitle: {
-            fontSize: "14px",
-            whiteSpace: "pre",
-        },
-        divider: {
-            width: "800px",
-        }
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        inner1: {
-            padding: "7vw 0vw 1.5vw 0vw"
-        },
-        inner2: {
-            padding: "2vw 0vw 7vw 0vw"
-        },
-        child: {
-            padding: "3vw"
-        },
-        typoTitle: {
-            fontSize: "7vw"
-        },
-        typeSubTitle: {
-            fontSize: "4.5vw",
-            whiteSpace: "pre",
-        },
-        divider: {
-            width: "80vw",
-        }
-    }
     return (
-        <div style={styles.root}>
+        <div className={styles.visit.baseBody}>
             <div>
-                <div style={styles.inner1}>
-                    <Typography color="inherit" align="center" style={styles.typoTitle}>
+                <div className={styles.visit.inner1}>
+                    <Typography color="inherit" align="center" className={styles.visit.typoTitle}>
                         {props.name}
                     </Typography>
                 </div>
-                <div style={styles.inner2}>
-                    <Typography color="inherit" align="center" style={styles.typeSubTitle}>
+                <div className={styles.visit.inner2}>
+                    <Typography color="inherit" align="center" className={styles.visit.typeSubTitle}>
                         {props.description}
                     </Typography>
                 </div>
                 <div>
-                    <Divider style={styles.divider}/>
+                    <Divider className={styles.visit.divider} />
                 </div>
-                <div style={styles.child}>
+                <div className={styles.visit.child}>
                     {props.children}
                 </div>
             </div>
@@ -128,56 +85,24 @@ interface BaseSideButtonsProps {
 }
 
 const BaseSideButtons: React.SFC<BaseSideButtonsProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        leftClick: {
-            width: 0,
-            height: 0,
-        },
-        rightClick: {
-            height: 0,
-            display: "flex",
-            justifyContent: "flex-end",
-        },
-        leftClickButton: {
-            padding: "10px 10px",
-            top: 40,
-            left: 20
-        },
-        rightClickButton: {
-            padding: "10px 10px",
-            top: 40,
-            right: 20
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        leftClickButton: {
-            padding: "3vw",
-            left: "5vw",
-            fontSize: "8vw"
-        },
-        rightClickButton: {
-            padding: "3vw",
-            right: "5vw",
-            fontSize: "8vw"
-        },
-    }
     return (
-        <div>
+        <div className={styles.visit.baseSide}>
             {
                 props.onLeftClick == undefined ? "" :
-                    <div style={styles.leftClick}>
-                        <BaseButton color="inherit" border={false} onClick={() => props.onLeftClick()} style={styles.leftClickButton}>
+                    <div className={styles.visit.left}>
+                        <CustomButton color="inherit" border={false} onClick={() => props.onLeftClick()}
+                            className={styles.visit.button}>
                             {"<"}
-                        </BaseButton>
+                        </CustomButton>
                     </div>
             }
             {
                 props.onRightClick == undefined ? "" :
-                    <div style={styles.rightClick}>
-                        <BaseButton color="inherit" border={false} onClick={() => props.onRightClick()} style={styles.rightClickButton}>
+                    <div className={styles.visit.right}>
+                        <CustomButton color="inherit" border={false} onClick={() => props.onRightClick()}
+                            className={styles.visit.button}>
                             {">"}
-                        </BaseButton>
+                        </CustomButton>
                     </div>
             }
         </div>
@@ -185,28 +110,10 @@ const BaseSideButtons: React.SFC<BaseSideButtonsProps> = (props) => {
 }
 
 const BaseNotFound: React.SFC<{}> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            display: "flex",
-            justifyContent: "center",
-        },
-        inner: {
-            padding: "50px"
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        inner: {
-            padding: "13vw"
-        },
-        typo: {
-            fontSize: "5vw"
-        }
-    }
     return (
-        <div style={styles.root}>
-            <div style={styles.inner}>
-                <Typography color="inherit" align="center" style={styles.typo}>
+        <div className={styles.visit.baseNotFound}>
+            <div className={styles.visit.inner}>
+                <Typography color="inherit" align="center" className={styles.visit.typo}>
                     リンクが見つかりません。
                 </Typography>
             </div>
@@ -215,29 +122,12 @@ const BaseNotFound: React.SFC<{}> = (props) => {
 }
 
 const SubHeader: React.SFC<{}> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        typo: {
-            fontSize: "20px",
-        },
-        pad: {
-            padding: "10px"
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        typo: {
-            fontSize: "7vw"
-        },
-        pad: {
-            padding: "3vw"
-        },
-    }
     return (
-        <div>
-            <Typography variant="display1" align="center" style={styles.typo}>
+        <div className={styles.visit.subHeader}>
+            <Typography variant="display1" align="center" className={styles.visit.typo}>
                 {props.children}
             </Typography>
-            <div style={styles.pad}></div>
+            <div className={styles.visit.pad}></div>
         </div>
     )
 }
@@ -247,58 +137,18 @@ interface SubPaperProps {
 }
 
 const SubPaper: React.SFC<SubPaperProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            padding: "10px"
-        },
-        head: {
-            padding: "0px 0px 10px 0px",
-            display: "flex",
-            justifyContent: "center",
-        },
-        title: {
-            fontSize: "18px"
-        },
-        page: {
-            width: "330px",
-            height: "330px"
-        },
-        inner: {
-            padding: "10px"
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        root: {
-            padding: "3vw",
-        },
-        head: {
-            padding: "0vw 0vw 3vw 0vw",
-            display: "flex",
-            justifyContent: "center",
-        },
-        title: {
-            fontSize: "6vw"
-        },
-        page: {
-        },
-        inner: {
-            padding: "3vw"
-        },
-    }
-
     return (
-        <div style={styles.root}>
-            <div style={styles.head}>
-                <Typography color="inherit" style={styles.title}>
+        <div className={styles.visit.subPaper}>
+            <div className={styles.visit.head}>
+                <Typography color="inherit" className={styles.visit.title}>
                     {props.title}
                 </Typography>
             </div>
-            <BasePaper style={styles.page}>
-                <div style={styles.inner}>
+            <CustomPaper className={styles.visit.paper}>
+                <div className={styles.visit.inner}>
                     {props.children}
                 </div>
-            </BasePaper>
+            </CustomPaper>
         </div>
     )
 }
@@ -308,21 +158,9 @@ interface VisitEnterProps {
 }
 
 export const VisitEnter: React.SFC<VisitEnterProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        pad: {
-            padding: "10px 0px"
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        pad: {
-            padding: "3vw 0vw"
-        },
-    }
-
     return (
-        <div>
-            <div style={styles.pad}></div>
+        <div className={styles.visit.enter}>
+            <div className={styles.visit.pad}></div>
             <BaseButton color="secondary" onClick={() => props.onClick()}>
                 Get Started
             </BaseButton>
@@ -363,69 +201,6 @@ interface CalenderBodyProps {
 const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
     let table = props.table
 
-    let styles: { [key: string]: React.CSSProperties } = {
-        weeks: {
-            display: "flex",
-        },
-        day: {
-            width: "100px",
-            padding: "5px",
-            display: "flex",
-            justifyContent: "center",
-        },        
-        paper: {
-            padding: "5px 5x",            
-        },
-        dayDate: {
-            padding: "0px 35px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-        },
-        dayWeek: {
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-        },
-        hours: {
-            display: "flex",
-            justifyContent: "center",
-        },
-        hour: {
-            width: "100px",
-            height: "40px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-        },
-        item: {
-        }
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        day: {
-            padding: "1vw",
-            display: "flex",
-            justifyContent: "center",
-        }, 
-        paper: {
-            width: "12vw",
-            padding: "0vw",
-        },
-        hour: {
-            width: "13vw",
-            height: "10vw",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-        },
-        item: {
-            fontSize: "4vw",
-        }
-    }
-
-    let weekColors = ['#F66', '#555', '#555', '#555', '#555', '#555', '#66F']
-
     let xWeeks = []
     for (let i = 0; i < table.days.length; i++) {
         let day = table.days[i]
@@ -437,12 +212,11 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
 
             xHour.push(
                 <div key={j}>
-                    <ListItem style={styles.hour}>
+                    <ListItem className={styles.visit.hour}>
                         <BaseButton color="inherit"
                             onClick={() => props.onItemClick(hour.time)}
                             border={false}
                             disabled={hour.isReserved}
-                            style={styles.item}
                         >
                             {utility.toHourFormat(hour.time)}
                         </BaseButton>
@@ -455,22 +229,23 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
         let xDw = utility.weekName(day.time)
         let xDay = utility.toDateFormat(day.time)
 
-        let styleDay: React.CSSProperties = {
-            ...styles.day,
-            color: weekColors[utility.weekIndex(day.time)]
-        }
+        let w = utility.weekIndex(day.time)
+        let sd = w == 0 ? styles.visit.sunday :
+            w == 6 ? styles.visit.saturday : styles.visit.weekday
 
         xWeeks.push(
             <div key={i}>
-                <div style={styleDay}>
-                    <BasePaper style={styles.paper}>
-                        <div style={styles.inner}>
-                            <div style={styles.dayDate}>{xDay}</div>
-                            <div style={styles.dayWeek}>{xDw}</div>
+                <div className={styles.visit.day}>
+                    <CustomPaper className={styles.visit.paper}>
+                        <div className={styles.visit.inner}>
+                            <div className={sd}>
+                                <div className={styles.visit.dayDate}>{xDay}</div>
+                                <div className={styles.visit.dayWeek}>{xDw}</div>
+                            </div>
                         </div>
-                    </BasePaper>
+                    </CustomPaper>
                 </div>
-                <div style={styles.hours}>
+                <div className={styles.visit.hours}>
                     <List>
                         {xHour}
                     </List>
@@ -480,7 +255,7 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
     }
 
     return (
-        <div style={styles.weeks}>
+        <div className={styles.visit.calenderBody}>
             {xWeeks}
         </div>
     )
@@ -492,59 +267,24 @@ interface CalenderClickProps {
 }
 
 const CalenderClick: React.SFC<CalenderClickProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        leftClick: {
-            width: 0,
-            height: 0,
-        },
-        rightClick: {
-            height: 0,
-            display: "flex",
-            justifyContent: "flex-end",
-        },
-        leftClickButton: {
-            padding: "10px 10px",
-            top: -40,
-            left: 0
-        },
-        rightClickButton: {
-            padding: "10px 10px",
-            top: -40,
-            right: 0
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        leftClickButton: {
-            padding: "3vw 3vw",
-            top: "-17.5vw",
-            left: "6vw",
-            fontSize: "5vw",
-        },
-        rightClickButton: {
-            padding: "3vw 3vw",
-            top: "-17.5vw",
-            right: "6vw",
-            fontSize: "5vw",
-        },
-    }
-
     return (
-        <div>
+        <div className={styles.visit.calenderClick}>
             {
                 props.onLeftClick == undefined ? "" :
-                    <div style={styles.leftClick}>
-                        <BaseButton color="inherit" border={false} onClick={() => props.onLeftClick()} style={styles.leftClickButton}>
+                    <div className={styles.visit.left}>
+                        <CustomButton color="inherit" border={false} onClick={() => props.onLeftClick()}
+                            className={styles.visit.button}>
                             {"<"}
-                        </BaseButton>
+                        </CustomButton>
                     </div>
             }
             {
                 props.onRightClick == undefined ? "" :
-                    <div style={styles.rightClick}>
-                        <BaseButton color="inherit" border={false} onClick={() => props.onRightClick()} style={styles.rightClickButton}>
+                    <div className={styles.visit.right}>
+                        <CustomButton color="inherit" border={false} onClick={() => props.onRightClick()}
+                            className={styles.visit.button}>
                             {">"}
-                        </BaseButton>
+                        </CustomButton>
                     </div>
             }
         </div>
@@ -561,29 +301,18 @@ interface VisitConfirmProps {
 }
 
 export class VisitConfirm extends React.Component<VisitConfirmProps> {
-    formName: string
-    formEmail: string
-    formSummary: string
-    formDescription: string
+    formName: string = ""
+    formEmail: string = ""
+    formSummary: string = ""
+    formDescription: string = ""
 
     render() {
         let props = this.props
-
-        let styles: { [key: string]: React.CSSProperties } = {
-            root: {
-                display: "flex"
-            },
-        }
-        styles = !utility.issp() ? styles : {
-            ...styles,
-            root: {
-            },
-        }
-
+        
         return (
             <div>
                 <SubHeader>Confirm Information</SubHeader>
-                <div style={styles.root}>
+                <div className={styles.visit.confirm}>
                     <SubPaper title="予定の日時">
                         <ConfirmForm
                             title={"名前"}
@@ -650,50 +379,18 @@ interface ConfirmFormProps {
 }
 
 const ConfirmForm: React.SFC<ConfirmFormProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            display: "flex",
-            alignItems: "center",
-            padding: "10px",
-        },
-        name: {
-            width: "80px",
-        },
-        form: {
-            padding: "0px 0px 0px 0px",
-            display: "flex",
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        root: {
-            display: "flex",
-            padding: "3vw",
-        },
-        name: {
-            width: "20vw",
-        },
-        form: {
-            display: "flex",
-        },
-        input: {
-            width: "40vw",
-            fontSize: "4vw",
-        }
-    }
-
     return (
-        <div style={styles.root}>
-            <div style={styles.name}>
+        <div className={styles.visit.confirmForm}>
+            <div className={styles.visit.name}>
                 {props.title}
             </div>
-            <div style={styles.form}>
+            <div className={styles.visit.form}>
                 {
                     props.disabled ? <div>{props.value}</div> :
-                        <Input
-                            onChange={t => props.onChange(t.target.value)}
+                        <CustomInput
+                            onChange={props.onChange}
                             placeholder={props.placeholder}
-                            style={styles.input}
+                            className={styles.visit.input}
                         />
                 }
             </div>
@@ -708,39 +405,11 @@ interface ConfirmButtonProps {
 }
 
 const ConfirmButton: React.SFC<ConfirmButtonProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            padding: "15px",
-            display: "flex",
-            justifyContent: "flex-end",
-        },
-        comp: {
-            display: "flex",
-            alignItems: "center",
-        },
-        message: {
-            color: "#F44",
-            padding: "0px 7px",
-        }
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        root: {
-            padding: "5vw",
-            display: "flex",
-            justifyContent: "flex-end",
-        },
-        message: {
-            color: "#F44",
-            padding: "0px 7px",
-        },
-    }
-
     return (
-        <div style={styles.root}>
+        <div className={styles.visit.confirmButton}>
             <Loading isReady={!props.isLoading}>
-                <div style={styles.comp}>
-                    <div style={styles.message}>
+                <div className={styles.visit.comp}>
+                    <div className={styles.visit.message}>
                         {props.message}
                     </div>
                     <div>
@@ -763,27 +432,11 @@ interface VisitResultProps {
 }
 
 export const VisitResult: React.SFC<VisitResultProps> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-            padding: "45px",
-            display: "flex",
-            justifyContent: "center",
-        },
-        sub: {
-            display: "flex"
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        sub: {
-        },
-    }
-
     return (
-        <div style={styles.root}>
+        <div className={styles.visit.result}>
             <div>
                 <SubHeader>Confirmed</SubHeader>
-                <div style={styles.sub}>
+                <div className={styles.visit.sub}>
                     <SubPaper title="予定の確認">
                         <ConfirmForm
                             title={""}
@@ -822,29 +475,15 @@ export const VisitResult: React.SFC<VisitResultProps> = (props) => {
 }
 
 export const ResultMore: React.SFC<{}> = (props) => {
-    let styles: { [key: string]: React.CSSProperties } = {
-        root: {
-        },
-        next: {
-            padding: "12px",
-        },
-    }
-    styles = !utility.issp() ? styles : {
-        ...styles,
-        next: {
-            padding: "4vw",
-        },
-    }
-
     return (
-        <div style={styles.root}>
-            <div style={styles.next}>
+        <div className={styles.visit.resultMore}>
+            <div className={styles.visit.next}>
                 <BaseButton color="primary"
                     onClick={() => window.location.reload()}>
                     さらに予約をする
                 </BaseButton>
             </div>
-            <div style={styles.next}>
+            <div className={styles.visit.next}>
                 <BaseButton color="primary"
                     onClick={() => window.location.href = "/"}>
                     ホストとしてはじめる

@@ -49,7 +49,8 @@ export const MainPage: React.SFC<MainPageProps> = (props) => {
                     <BaseInfoItem><Tp>{props.name}</Tp></BaseInfoItem>
                     <BaseInfoItem><Tp>{props.email}</Tp></BaseInfoItem>
                     <BaseInfoItem>
-                        <TextClip><Tp>{window.location.host + "/" + props.address}</Tp></TextClip>            
+                        <TextClip url={window.location.host + "/" + props.address}
+                            ><Tp>{window.location.host + "/" + props.address}</Tp></TextClip>            
                     </BaseInfoItem>
                     <BaseInfoBtns 
                         onShowPage={props.onShowPage}
