@@ -81,7 +81,6 @@ interface ViewsProps {
 }
 
 export const Views: React.SFC<ViewsProps> = (props) => {
-    /*
     return (
         <div>
         {
@@ -90,11 +89,6 @@ export const Views: React.SFC<ViewsProps> = (props) => {
                     {props.children}
                 </SwipeableViews>
         }
-        </div>
-    )*/
-    return (
-        <div>
-            {props.children}
         </div>
     )
 }
