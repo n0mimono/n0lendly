@@ -29,6 +29,8 @@ func ListenAndServe() {
 	http.HandleFunc("/api/visit/", ApiVisit)
 	http.HandleFunc("/api/visit/calender/", ApiVisitCalender)
 	http.HandleFunc("/api/visit/calender/reserve/", ApiVisitCalenderReserve)
+	http.HandleFunc("/api/sandbox/hello1", ApiHello1)
+	http.HandleFunc("/api/sandbox/hello2", withKeyAPI(ApiHello2))
 
 	// http: listen
 	port := config.PORT

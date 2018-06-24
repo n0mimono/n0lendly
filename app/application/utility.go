@@ -59,16 +59,19 @@ func toInputCheckSession(r *http.Request) InputCheckSession {
 		return InputCheckSession{Hash: hash}
 	}
 
-	hash = r.URL.Query().Get("key")
-	if hash != "" {
-		return InputCheckSession{Hash: hash}
-	}
+	/*
+		hash = r.URL.Query().Get("key")
+		if hash != "" {
+			return InputCheckSession{Hash: hash}
+		}
 
-	cookie, err := r.Cookie("Hash")
-	if err != nil {
-		return InputCheckSession{Hash: ""}
-	}
-	return InputCheckSession{Hash: cookie.Value}
+		cookie, err := r.Cookie("Hash")
+		if err != nil {
+			return InputCheckSession{Hash: ""}
+		}
+		return InputCheckSession{Hash: cookie.Value}
+	*/
+	return InputCheckSession{Hash: ""}
 }
 
 func getError(code int) map[string]interface{} {
