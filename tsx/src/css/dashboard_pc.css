@@ -34,6 +34,35 @@
     color: #888;
 }
 
+.settingUpdateList .input {
+    width: 300px;
+}
+
+.settingUpdateList .number {
+    display: flex;
+}
+
+.settingUpdateList .number .input {
+    width: 25px;
+}
+
+.settingUpdateList .enter {
+    padding: 10px 158px;
+}
+
+.settingUpdateItem {
+    display: flex;
+}
+
+.settingUpdateItem .left {
+    width: 160px;
+    padding: 10px 0px;
+}
+
+.settingUpdateItem .right {
+    padding: 10px 0px;
+}
+
 .block {
     display: list-item !important;
     padding: 30px 5px 10px 5px;

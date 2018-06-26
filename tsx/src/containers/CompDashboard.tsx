@@ -3,7 +3,7 @@ import * as React from 'react'
 import { List, ListItem } from 'material-ui';
 import Typography from 'material-ui/Typography'
 
-import { Tp, BaseButton, BasePaper, BaseIcon, BaseInput } from './Common'
+import { Tp, BaseButton, BasePaper, BaseIcon, BaseInput, CustomInput } from './Common'
 import * as utility from '../modules/utility'
 import * as Dashboard from '../modules/dashboard'
 
@@ -58,6 +58,75 @@ export const LinkUpdate: React.SFC<LinkUpdateProps> = (props) => {
             </div>
             <div className={styles.dashboard.helper}>
                 {props.form.helper}
+            </div>
+        </div>
+    )
+}
+
+interface SettingUpdateProps {
+    form: Dashboard.SettingFormInput
+}
+
+export const SettingUpdate: React.SFC<SettingUpdateProps> = (props) => {
+    let form = props.form
+    return (
+        <div className={styles.dashboard.settingUpdateList}>
+            <SettingUpdateItem title={"説明文"} >
+                <CustomInput className={styles.dashboard.input}
+                    onChange={t => form.description.onChange(t)}
+                    placeholder={"おいでやす"} value={form.description.value}
+                    multiline={true} rows={3} rowsMax={3}
+                />
+            </SettingUpdateItem>
+            <SettingUpdateItem title={"予定タイトル"} >
+                <CustomInput className={styles.dashboard.input}
+                    onChange={t => form.title.onChange(t)}
+                    placeholder={""} value={form.title.value}
+                />
+            </SettingUpdateItem>
+            <SettingUpdateItem title={"予定本文"} >
+                <CustomInput className={styles.dashboard.input}
+                    onChange={t => form.body.onChange(t)}
+                    placeholder={""} value={form.body.value}
+                    multiline={true} rows={2} rowsMax={2}
+                />
+            </SettingUpdateItem>
+            <SettingUpdateItem title={"時刻の範囲"} >
+                <div className={styles.dashboard.number}>
+                    <CustomInput className={styles.dashboard.input}
+                        onChange={t => form.rangeMin.onChange(t)}
+                        placeholder={""} value={form.rangeMin.value}
+                    />
+                    <div>時　〜　</div>
+                    <CustomInput className={styles.dashboard.input}
+                        onChange={t => form.rangeMax.onChange(t)}
+                        placeholder={""} value={form.rangeMax.value}
+                    />
+                    <div>時</div>
+                </div>
+            </SettingUpdateItem>
+            <div className={styles.dashboard.enter}>
+                <BaseButton color="primary" onClick={() => props.form.onEnter()}>
+                    登録する
+                </BaseButton>
+            </div>
+        </div>
+    )
+}
+
+interface SettingUpdateItemProps {
+    title: string
+    form?: Dashboard.FormInput
+}
+
+export const SettingUpdateItem: React.SFC<SettingUpdateItemProps> = (props) => {
+    return (
+        <div className={styles.dashboard.settingUpdateItem}>
+            <div className={styles.dashboard.left}>
+                {props.title}
+            </div>
+            <div className={styles.dashboard.right}>
+                {props.children}
             </div>
         </div>
     )

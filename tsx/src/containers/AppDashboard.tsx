@@ -43,12 +43,29 @@ export class Component extends React.Component<Props> {
                             helper: props.addressForm.warning,
                             isShort: true,
                         }}
-                        descriotionForm={{
-                            onChange: t => props.watchDescription({ ...props.descriptionForm, value: t }),
-                            onEnter: t => props.registerDescription(props.descriptionForm),
-                            value: props.descriptionForm.value,
-                            helper: props.descriptionForm.warning,
-                            isShort: false,
+                        settingForm={{
+                            onEnter: () => props.registerSetting(props.settingForm),
+                            description: {
+                                onChange: t => props.watchSetting({ ...props.settingForm, description: t }),
+                                value: props.settingForm.description,
+                            },
+                            title: {
+                                onChange: t => props.watchSetting({ ...props.settingForm, title: t }),
+                                value: props.settingForm.title,
+                            },
+                            body: {
+                                onChange: t => props.watchSetting({ ...props.settingForm, body: t }),
+                                value: props.settingForm.body,
+                            },
+                            rangeMin: {
+                                onChange: t => props.watchSetting({ ...props.settingForm, rangeMin: t }),
+                                value: props.settingForm.rangeMin,
+                            },
+                            rangeMax: {
+                                onChange: t => props.watchSetting({ ...props.settingForm, rangeMax: t }),
+                                value: props.settingForm.rangeMax,
+                            },
+                            warning: props.settingForm.warning,
                         }}
                    />
                 </Loading>
@@ -91,6 +108,10 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
                         name: r.name,
                         email: r.email,
                         description: r.description,
+                        title: r.title,
+                        body: r.body,
+                        rangeMin: r.range_min,
+                        rangeMax: r.range_max,
                     }))    
                 }
             })
@@ -101,7 +122,11 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
                     name: '',
                     email: '',
                     description: '',
-                }))
+                    title: '',
+                    body: '',
+                    rangeMin: '',
+                    rangeMax: '',
+            }))
             })
         },
         watchAddress: (form: Dashboard.Form) => {
@@ -129,6 +154,10 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
                         name: r.name,
                         email: r.email,
                         description: r.description,
+                        title: r.title,
+                        body: r.body,
+                        rangeMin: r.range_min,
+                        rangeMax: r.range_max,
                     }))    
                 }
 
@@ -139,11 +168,11 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
                 }))
             })
         },
-        watchDescription: (form: Dashboard.Form) => {
-            dispatch(Dashboard.actions.updateDescription(form))
+        watchSetting: (form: Dashboard.SettingForm) => {
+            dispatch(Dashboard.actions.updateSetting(form))
         },
-        registerDescription: (form: Dashboard.Form) => {
-            api('/api/account/', 'POST', { description: form.value })
+        registerSetting: (form: Dashboard.SettingForm) => {
+             api('/api/account/', 'POST', { description: form.description })
             .then(r => {
                 if (r.success) {
                     dispatch(Dashboard.actions.updateUserData({
@@ -152,12 +181,16 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
                         name: r.name,
                         email: r.email,
                         description: r.description,
+                        title: r.title,
+                        body: r.body,
+                        rangeMin: r.range_min,
+                        rangeMax: r.range_max,
                     }))    
                 }
 
-                dispatch(Dashboard.actions.updateDescription({
+                dispatch(Dashboard.actions.updateSetting({
                     ...form,
-                    warning: r.success ? '登録されました。' : '無効な説明文です。'
+                    warning: r.success ? '登録されました。' : '無効な設定です。'
                 }))
             })
         },

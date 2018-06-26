@@ -5,7 +5,7 @@ import { HostHeader, Tp } from './Common'
 import * as Dashboard from '../modules/dashboard'
 
 import {
-    LinkBlock, LinkDescription, LinkUpdate,
+    LinkBlock, LinkDescription, LinkUpdate, SettingUpdate,
     Blocks, Block, BaseInfoItem, BaseInfoBtns, AccountDelete,
     TextClip,
     MiniBlock
@@ -33,7 +33,7 @@ interface MainPageProps {
     address: string
 
     addressForm: Dashboard.FormInput
-    descriotionForm: Dashboard.FormInput
+    settingForm: Dashboard.SettingFormInput
 
     onShowPage: () => void
     onLogout: () => void
@@ -59,11 +59,11 @@ export const MainPage: React.SFC<MainPageProps> = (props) => {
                 </Block>
 
                 <Block title={"リンク管理"}>
-                    <MiniBlock title={"リンクを変更する"}>
+                    <MiniBlock title={"リンクの変更"}>
                         <LinkUpdate form={props.addressForm} />
                     </MiniBlock>
-                    <MiniBlock title={"説明文を変更する"}>
-                        <LinkUpdate form={props.descriotionForm} />
+                    <MiniBlock title={"設定の変更"}>
+                        <SettingUpdate form={props.settingForm}/>
                     </MiniBlock>
                 </Block>
 

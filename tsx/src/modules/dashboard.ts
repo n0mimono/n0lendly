@@ -10,6 +10,10 @@ export interface UserData {
     name: string
     email: string
     description: string
+    title: string
+    body: string
+    rangeMin: string
+    rangeMax: string
 }
 
 export interface Form {
@@ -18,12 +22,31 @@ export interface Form {
     warning: string
 }
 
+export interface SettingForm {
+    description: string
+    title: string
+    body: string
+    rangeMin: string
+    rangeMax: string
+    warning: string
+}
+
 export interface FormInput {
     onChange: (t: string) => void
-    onEnter: (t: string) => void
+    onEnter?: (t: string) => void
     value: string
-    helper: string
-    isShort: boolean
+    helper?: string
+    isShort?: boolean
+}
+
+export interface SettingFormInput {
+    onEnter: () => void
+    description: FormInput
+    title: FormInput
+    body: FormInput
+    rangeMin: FormInput
+    rangeMax: FormInput
+    warning: string
 }
 
 // actions
@@ -33,15 +56,15 @@ export const actions = {
     init: actionCreator<UserData>('DASHBOARD_INIT'),
     updateUserData: actionCreator<UserData>('DASHBOARD_UPDATE_USER_DATA'),
     updateAddress: actionCreator<Form>('DASHBOARD_UPDATE_ADDRESS'),
-    updateDescription: actionCreator<Form>('DASHBOARD_UPDATE_DESCRIPTION'),
+    updateSetting: actionCreator<SettingForm>('DASHBOARD_UPDATE_SETTING'),
 }
 
 export interface Actions {
     init: () => void
     watchAddress: (form: Form) => void
     registerAddress: (form: Form) => void
-    watchDescription: (form: Form) => void
-    registerDescription: (form: Form) => void
+    watchSetting: (form: SettingForm) => void
+    registerSetting: (form: SettingForm) => void
     showPage: (address: string) => void
     logout: () => void
     deleteAccount: () => void
@@ -52,7 +75,7 @@ export interface State {
     isReady: boolean
     userData: UserData
     addressForm: Form
-    descriptionForm: Form
+    settingForm: SettingForm
 }
 
 const initState: State = {
@@ -63,16 +86,23 @@ const initState: State = {
         name: '',
         email: '',
         description: '',
+        title: '',
+        body: '',
+        rangeMin: '',
+        rangeMax: '',
     },
     addressForm: {
         timerId: -1,
         value: '',
         warning: ''
     },
-    descriptionForm: {
-        timerId: -1,
-        value: '',
-        warning: ''        
+    settingForm: {
+        description: '',
+        title: '',
+        body: '',
+        rangeMin: '',
+        rangeMax: '',
+        warning: ''   
     }
 }
 
@@ -88,10 +118,20 @@ export const Reducer = reducerWithInitialState(initState)
                 value: data.valid ? data.address : '',
                 warning: ''
             },
-            descriptionForm: {
-                timerId: -1,
-                value: data.valid ? data.description : '',
-                warning: ''
+            settingForm: data.valid ? {
+                description: data.description,
+                title: data.title,
+                body: data.body,
+                rangeMin: data.rangeMin,
+                rangeMax: data.rangeMax,
+                warning: '',
+            } : {
+                description: '',
+                title: '',
+                body: '',
+                rangeMin: '',
+                rangeMax: '',
+                warning: '',
             }
         }
     })
@@ -107,9 +147,9 @@ export const Reducer = reducerWithInitialState(initState)
             addressForm: {...form}
         }
     })
-    .case(actions.updateDescription, (state, form) => {
+    .case(actions.updateSetting, (state, form) => {
         return {
             ...state,
-            descriptionForm: {...form}
+            settingForm: {...form}
         }
     })
