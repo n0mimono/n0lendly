@@ -46,13 +46,18 @@ func (router ApiRouterWithKey) ServeHTTP(w http.ResponseWriter, r *http.Request,
 }
 
 type OutAccount struct {
-	Name         string `json:"name"`
-	Picture      string `json:"picture"`
-	Email        string `json:"email"`
-	Address      string `json:"address"`
-	AddressValid bool   `json:"address_valid"`
-	Description  string `json:"description"`
-	Success      bool   `json:"success"`
+	Name           string `json:"name"`
+	Picture        string `json:"picture"`
+	Email          string `json:"email"`
+	Address        string `json:"address"`
+	AddressValid   bool   `json:"address_valid"`
+	ShowName       string `json:"show_name"`
+	Description    string `json:"description"`
+	CalSummary     string `json:"cal_summary"`
+	CalDescription string `json:"cal_description"`
+	RangeMin       int    `json:"range_min"`
+	RangeMax       int    `json:"range_max"`
+	Success        bool   `json:"success"`
 }
 
 func ApiAccount(w http.ResponseWriter, r *http.Request, user *domain.User) {
@@ -68,13 +73,18 @@ type ApiAccountGet struct{}
 func (in *ApiAccountGet) ServeHTTP(w http.ResponseWriter, r *http.Request, user *domain.User) {
 	link := Uc.CheckLink(InputCheckLink{Uid: user.ID})
 	data := OutAccount{
-		Name:         user.Name,
-		Picture:      user.Picture,
-		Email:        user.Email,
-		Address:      link.Address,
-		AddressValid: link.Exist,
-		Description:  link.Description,
-		Success:      true,
+		Name:           user.Name,
+		Picture:        user.Picture,
+		Email:          user.Email,
+		Address:        link.Address,
+		AddressValid:   link.Exist,
+		ShowName:       link.ShowName,
+		Description:    link.Description,
+		CalSummary:     link.CalSummary,
+		CalDescription: link.CalDescription,
+		RangeMin:       link.RangeMin,
+		RangeMax:       link.RangeMax,
+		Success:        true,
 	}
 	executeJson(w, data)
 }
@@ -84,23 +94,39 @@ func (in *ApiAccountGet) Validate() bool {
 }
 
 type ApiAccountPost struct {
-	Address     string `json:"address"`
-	Description string `json:"description"`
+	Address        string `json:"address"`
+	ShowName       string `json:"show_name"`
+	Description    string `json:"description"`
+	CalSummary     string `json:"cal_summary"`
+	CalDescription string `json:"cal_description"`
+	RangeMin       int    `json:"range_min"`
+	RangeMax       int    `json:"range_max"`
 }
 
 func (in *ApiAccountPost) ServeHTTP(w http.ResponseWriter, r *http.Request, user *domain.User) {
 	link := Uc.RegisterLink(InputRegisterLink{
-		Uid:         user.ID,
-		Address:     in.Address,
-		Description: in.Description,
+		Uid:            user.ID,
+		Address:        in.Address,
+		ShowName:       in.ShowName,
+		Description:    in.Description,
+		CalSummary:     in.CalSummary,
+		CalDescription: in.CalDescription,
+		RangeMin:       in.RangeMin,
+		RangeMax:       in.RangeMax,
 	})
 	data := OutAccount{
-		Name:         user.Name,
-		Picture:      user.Picture,
-		Email:        user.Email,
-		Address:      link.Address,
-		AddressValid: link.Valid,
-		Success:      link.Success,
+		Name:           user.Name,
+		Picture:        user.Picture,
+		Email:          user.Email,
+		Address:        link.Address,
+		AddressValid:   link.Valid,
+		ShowName:       link.ShowName,
+		Description:    link.Description,
+		CalSummary:     link.CalDescription,
+		CalDescription: link.CalDescription,
+		RangeMin:       link.RangeMin,
+		RangeMax:       link.RangeMax,
+		Success:        link.Success,
 	}
 	executeJson(w, data)
 }
@@ -153,10 +179,15 @@ func (in *ApiAvailableGet) Validate() bool {
 }
 
 type OutVisit struct {
-	Address     string `json:"address"`
-	Exist       bool   `json:"exist"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
+	Address        string `json:"address"`
+	Exist          bool   `json:"exist"`
+	Name           string `json:"name"`
+	ShowName       string `json:"show_name"`
+	Description    string `json:"description"`
+	CalSummary     string `json:"cal_summary"`
+	CalDescription string `json:"cal_description"`
+	RangeMin       int    `json:"range_min"`
+	RangeMax       int    `json:"range_max"`
 }
 
 func ApiVisit(w http.ResponseWriter, r *http.Request) {
@@ -172,10 +203,15 @@ type ApiVisitGet struct {
 func (in *ApiVisitGet) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	visit := Uc.Visit(InputVisit{Address: in.Address})
 	data := OutVisit{
-		Address:     in.Address,
-		Exist:       visit.Exist,
-		Name:        visit.Name,
-		Description: visit.Description,
+		Address:        in.Address,
+		Exist:          visit.Exist,
+		Name:           visit.Name,
+		ShowName:       visit.ShowName,
+		Description:    visit.Description,
+		CalSummary:     visit.CalSummary,
+		CalDescription: visit.CalDescription,
+		RangeMin:       visit.RangeMin,
+		RangeMax:       visit.RangeMax,
 	}
 	executeJson(w, data)
 }

@@ -47,7 +47,13 @@
 }
 
 .settingUpdateList .enter {
+    display: flex;
     padding: 10px 158px;
+}
+
+.settingUpdateList .warning {
+    padding: 10px 20px;
+    color: #888;
 }
 
 .settingUpdateItem {

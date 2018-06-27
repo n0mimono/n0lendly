@@ -57,20 +57,10 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
 
             api('/api/visit/', 'GET', { address: address })
             .then(r => {
-                dispatch(Visit.actions.init({
-                    address: r.address,
-                    exist: r.exist,
-                    name: r.name,
-                    description: r.description
-                }))
+                dispatch(Visit.actions.init(Visit.resToUserData(r)))
             })
             .catch(e => {
-                dispatch(Visit.actions.init({
-                    address: address,
-                    exist: false,
-                    name: '',
-                    description: 'Unknown Error.'
-                }))
+                dispatch(Visit.actions.init(Visit.errToUserData(address)))
             })
 
             dispatch(Visit.actions.setPage0({}))

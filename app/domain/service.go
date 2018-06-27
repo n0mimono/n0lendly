@@ -161,11 +161,9 @@ func (service Service) RegisterLink(uid uint, address string) (*Link, bool, bool
 		}
 	} else {
 		// create link
-		link = &Link{
-			UserID:      uid,
-			Address:     address,
-			Description: GenerateDefaultLinkDescription(),
-		}
+		user, _ := service.Repo.Account.GetUser(ToUser(uid))
+		link = GenerateDefaultLink(uid, address, user.Name)
+
 		link, err := service.Repo.Link.Create(link)
 		if err != nil {
 			return link, false, false, CodeLinkCreateFailure
@@ -175,15 +173,17 @@ func (service Service) RegisterLink(uid uint, address string) (*Link, bool, bool
 	}
 }
 
-func (service Service) UpdateLinkDescription(uid uint, description string) (*Link, bool, int) {
+func (service Service) UpdateLinkOptions(uid uint, next *Link) (*Link, bool, int) {
 	link, exist := service.Repo.Account.GetLink(ToUser(uid))
 	if !exist {
 		return link, false, CodeLinkUpdateFailure
 	}
 
-	link.Description = description
+	next.ID = link.ID
+	next.UserID = link.UserID
+	next.Address = link.Address
 
-	link, err := service.Repo.Link.Update(link)
+	link, err := service.Repo.Link.Update(next)
 	if err != nil {
 		return link, false, CodeLinkUpdateFailure
 	}

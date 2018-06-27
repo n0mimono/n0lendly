@@ -166,6 +166,7 @@ interface InputProps {
     multiline?: boolean
     rows?: number
     rowsMax?: number
+    defaultValue?: string
 }
 
 export const BaseInput: React.SFC<InputProps> = (props) => {
@@ -177,6 +178,7 @@ export const BaseInput: React.SFC<InputProps> = (props) => {
             multiline={props.multiline}
             rows={props.rows}
             rowsMax={props.rowsMax}
+            defaultValue={props.defaultValue}
             className={styles.common.baseInput}
         />
     )
@@ -191,6 +193,7 @@ export const CustomInput: React.SFC<InputProps & CustomProps> = (props) => {
             multiline={props.multiline}
             rows={props.rows}
             rowsMax={props.rowsMax}
+            defaultValue={props.defaultValue}
             className={props.className}
         />
     )

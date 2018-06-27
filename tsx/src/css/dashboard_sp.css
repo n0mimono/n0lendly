@@ -34,7 +34,37 @@
     color: #888;
 }
 
-/* todo: sp版 */
+.settingUpdateList .input {
+    width: 70vw;
+}
+
+.settingUpdateList .number {
+}
+
+.settingUpdateList .number .input {
+    font-size: 7vw;
+}
+
+.settingUpdateList .enter {
+    padding: 2vw;
+    display: flex;
+}
+
+.settingUpdateList .warning {
+    padding: 2vw;
+    color: #888;
+}
+
+.settingUpdateItem {
+}
+
+.settingUpdateItem .left {
+    padding: 10px 0px;
+}
+
+.settingUpdateItem .right {
+    padding: 10px 0px;
+}
 
 .block {
     display: list-item !important;

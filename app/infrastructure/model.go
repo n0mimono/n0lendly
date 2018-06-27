@@ -70,9 +70,14 @@ func (token Token) out() *domain.Token {
 
 func (link Link) in(l *domain.Link) Link {
 	ret := Link{
-		UserID:      l.UserID,
-		Address:     l.Address,
-		Description: l.Description,
+		UserID:         l.UserID,
+		Address:        l.Address,
+		ShowName:       l.ShowName,
+		Description:    l.Description,
+		CalSummary:     l.CalSummary,
+		CalDescription: l.CalDescription,
+		RangeMin:       l.RangeMin,
+		RangeMax:       l.RangeMax,
 	}
 	ret.ID = l.ID
 	return ret
@@ -80,10 +85,15 @@ func (link Link) in(l *domain.Link) Link {
 
 func (link Link) out() *domain.Link {
 	return &domain.Link{
-		ID:          link.ID,
-		UserID:      link.UserID,
-		Address:     link.Address,
-		Description: link.Description,
+		ID:             link.ID,
+		UserID:         link.UserID,
+		Address:        link.Address,
+		ShowName:       link.ShowName,
+		Description:    link.Description,
+		CalSummary:     link.CalSummary,
+		CalDescription: link.CalDescription,
+		RangeMin:       link.RangeMin,
+		RangeMax:       link.RangeMax,
 	}
 }
 

@@ -25,6 +25,7 @@ export class Component extends React.Component<Props> {
 
     render() {
         let props = this.props
+        let setting = props.settingForm
         if (props.userData.valid) {
             return (
                 <Loading isReady={props.isReady}>
@@ -44,26 +45,32 @@ export class Component extends React.Component<Props> {
                             isShort: true,
                         }}
                         settingForm={{
-                            onEnter: () => props.registerSetting(props.settingForm),
+                            onEnter: () => props.registerSetting(setting),
+                            showName: {
+                                onChange: t => props.watchSetting({ ...setting, showName: t }),
+                                value: setting.showName,
+                            },
                             description: {
-                                onChange: t => props.watchSetting({ ...props.settingForm, description: t }),
-                                value: props.settingForm.description,
+                                onChange: t => props.watchSetting({ ...setting, description: t }),
+                                value: setting.description,
                             },
-                            title: {
-                                onChange: t => props.watchSetting({ ...props.settingForm, title: t }),
-                                value: props.settingForm.title,
+                            calSummary: {
+                                onChange: t => props.watchSetting({ ...setting, calSummary: t }),
+                                value: setting.calSummary,
                             },
-                            body: {
-                                onChange: t => props.watchSetting({ ...props.settingForm, body: t }),
-                                value: props.settingForm.body,
+                            calDescription: {
+                                onChange: t => props.watchSetting({ ...setting, calDescription: t }),
+                                value: setting.calDescription,
                             },
                             rangeMin: {
-                                onChange: t => props.watchSetting({ ...props.settingForm, rangeMin: t }),
-                                value: props.settingForm.rangeMin,
+                                onChange: t => props.watchSetting({ ...setting,
+                                    rangeMin: Dashboard.transTimeRange(t, setting.rangeMin) }),
+                                value: setting.rangeMin,
                             },
                             rangeMax: {
-                                onChange: t => props.watchSetting({ ...props.settingForm, rangeMax: t }),
-                                value: props.settingForm.rangeMax,
+                                onChange: t => props.watchSetting({ ...setting,
+                                    rangeMax: Dashboard.transTimeRange(t, setting.rangeMax) }),
+                                value: setting.rangeMax,
                             },
                             warning: props.settingForm.warning,
                         }}
@@ -102,31 +109,11 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
                 if (apiSessionOut(r)) {
                     window.location.href = '/login'
                 } else {
-                    dispatch(Dashboard.actions.init({
-                        address: r.address,
-                        valid: r.address_valid,
-                        name: r.name,
-                        email: r.email,
-                        description: r.description,
-                        title: r.title,
-                        body: r.body,
-                        rangeMin: r.range_min,
-                        rangeMax: r.range_max,
-                    }))    
+                    dispatch(Dashboard.actions.init(Dashboard.resToUserData(r)))    
                 }
             })
             .catch(e => {
-                dispatch(Dashboard.actions.init({
-                    address: '',
-                    valid: false,
-                    name: '',
-                    email: '',
-                    description: '',
-                    title: '',
-                    body: '',
-                    rangeMin: '',
-                    rangeMax: '',
-            }))
+                dispatch(Dashboard.actions.init(Dashboard.initUserData()))
             })
         },
         watchAddress: (form: Dashboard.Form) => {
@@ -148,17 +135,7 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
             api('/api/account/', 'POST', { address: form.value })
             .then(r => {
                 if (r.success) {
-                    dispatch(Dashboard.actions.updateUserData({
-                        address: r.address,
-                        valid: r.address_valid,
-                        name: r.name,
-                        email: r.email,
-                        description: r.description,
-                        title: r.title,
-                        body: r.body,
-                        rangeMin: r.range_min,
-                        rangeMax: r.range_max,
-                    }))    
+                    dispatch(Dashboard.actions.init(Dashboard.resToUserData(r)))    
                 }
 
                 window.clearTimeout(form.timerId)
@@ -172,20 +149,10 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
             dispatch(Dashboard.actions.updateSetting(form))
         },
         registerSetting: (form: Dashboard.SettingForm) => {
-             api('/api/account/', 'POST', { description: form.description })
+             api('/api/account/', 'POST', Dashboard.formToQuery(form))
             .then(r => {
                 if (r.success) {
-                    dispatch(Dashboard.actions.updateUserData({
-                        address: r.address,
-                        valid: r.address_valid,
-                        name: r.name,
-                        email: r.email,
-                        description: r.description,
-                        title: r.title,
-                        body: r.body,
-                        rangeMin: r.range_min,
-                        rangeMax: r.range_max,
-                    }))    
+                    dispatch(Dashboard.actions.updateUserData(Dashboard.resToUserData(r)))    
                 }
 
                 dispatch(Dashboard.actions.updateSetting({

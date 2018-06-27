@@ -171,6 +171,8 @@ export const VisitEnter: React.SFC<VisitEnterProps> = (props) => {
 interface VisitCalenderProps {
     calender: Visit.Calender
     calenderPage: Visit.CalenderPage
+    rangeMin: number
+    rangeMax: number
 
     onLeftClick?: () => void
     onRightClick?: () => void
@@ -187,13 +189,16 @@ export const VisitCalender: React.SFC<VisitCalenderProps> = (props) => {
         <div>
             <SubHeader>Select a Time</SubHeader>
             <CalenderClick onLeftClick={props.onLeftClick} onRightClick={props.onRightClick} />
-            <CalenderBody table={table} onItemClick={props.onItemClick} />
+            <CalenderBody table={table} onItemClick={props.onItemClick}
+                rangeMin={props.rangeMin} rangeMax={props.rangeMax} />
         </div>
     )
 }
 
 interface CalenderBodyProps {
     table: utility.CalenderTable
+    rangeMin: number
+    rangeMax: number
 
     onItemClick: (v: string) => void
 }
@@ -207,7 +212,7 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
 
         let xHour = []
         for (let j = 0; j < day.hours.length; j++) {
-            if (j < 9 || j >= 24) continue
+            if (j < props.rangeMin || j > props.rangeMax) continue
             let hour = day.hours[j]
 
             xHour.push(
@@ -295,6 +300,8 @@ interface VisitConfirmProps {
     address: string
     name: string
     time: string
+    initSummary: string
+    initDescription: string
 
     onConfirm: (req: Visit.CalenderRequest) => void
     confirm: Visit.Confirm
@@ -309,6 +316,9 @@ export class VisitConfirm extends React.Component<VisitConfirmProps> {
     render() {
         let props = this.props
         
+        this.formSummary = props.initSummary
+        this.formDescription = props.initDescription
+
         return (
             <div>
                 <SubHeader>Confirm Information</SubHeader>
@@ -344,12 +354,14 @@ export class VisitConfirm extends React.Component<VisitConfirmProps> {
                         <ConfirmForm
                             title={"予定名"}
                             onChange={t => this.formSummary = t}
-                            placeholder={"MTG"}
+                            placeholder={""}
+                            defaultValue={props.initSummary}
                         />
                         <ConfirmForm
                             title={"詳細"}
                             onChange={t => this.formDescription = t}
                             placeholder={""}
+                            defaultValue={props.initDescription}
                         />
                         <ConfirmButton
                             onClick={() => props.onConfirm({
@@ -376,6 +388,7 @@ interface ConfirmFormProps {
     placeholder?: string
     disabled?: boolean
     value?: string
+    defaultValue?: string
 }
 
 const ConfirmForm: React.SFC<ConfirmFormProps> = (props) => {
@@ -390,6 +403,7 @@ const ConfirmForm: React.SFC<ConfirmFormProps> = (props) => {
                         <CustomInput
                             onChange={props.onChange}
                             placeholder={props.placeholder}
+                            defaultValue={props.defaultValue}
                             className={styles.visit.input}
                         />
                 }

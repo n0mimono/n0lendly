@@ -9,6 +9,39 @@ export interface UserData {
     exist: boolean
     name: string
     description: string
+    showName: string
+    calSummary: string
+    calDescription: string
+    rangeMin: number
+    rangeMax: number
+}
+
+export function errToUserData(address: string): UserData {
+    return {
+        address: address,
+        exist: false,
+        name: '',
+        description: '',
+        showName: '',
+        calSummary: '',
+        calDescription: '',
+        rangeMin: 0,
+        rangeMax: 0,
+    }
+}
+
+export function resToUserData(r: any): UserData {
+    return {
+        address: r.address,
+        exist: r.exist,
+        name: r.name,
+        description: r.description,
+        showName: r.show_name,
+        calSummary: r.cal_summary,
+        calDescription: r.cal_description,
+        rangeMin: r.range_min == undefined ? 0 : r.range_min,
+        rangeMax: r.range_max == undefined ? 0 : r.range_max,
+    }
 }
 
 export interface Page0 {
@@ -128,7 +161,12 @@ const initState: State = {
         address: '',
         exist: false,
         name: '',
-        description: ''
+        description: '',
+        showName: '',
+        calSummary: '',
+        calDescription: '',
+        rangeMin: 0,
+        rangeMax: 0,
     },
     calender: {
         isReady: false,

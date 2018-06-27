@@ -26,14 +26,28 @@ type InputCheckLink struct {
 }
 
 type OutputCheckLink struct {
-	Exist       bool
-	Address     string
-	Description string
+	Exist          bool
+	Address        string
+	ShowName       string
+	Description    string
+	CalSummary     string
+	CalDescription string
+	RangeMin       int
+	RangeMax       int
 }
 
 func (uc Usecase) CheckLink(in InputCheckLink) OutputCheckLink {
 	link, exist := uc.Service.GetLink(in.Uid)
-	return OutputCheckLink{Exist: exist, Address: link.Address, Description: link.Description}
+	return OutputCheckLink{
+		Exist:          exist,
+		Address:        link.Address,
+		ShowName:       link.ShowName,
+		Description:    link.Description,
+		CalSummary:     link.CalSummary,
+		CalDescription: link.CalDescription,
+		RangeMin:       link.RangeMin,
+		RangeMax:       link.RangeMax,
+	}
 }
 
 type InputCheckSession struct {
@@ -97,16 +111,26 @@ func (uc Usecase) CheckAddressAvailable(in InputCheckAddressAvailable) OutputChe
 }
 
 type InputRegisterLink struct {
-	Uid         uint
-	Address     string
-	Description string
+	Uid            uint
+	Address        string
+	ShowName       string
+	Description    string
+	CalSummary     string
+	CalDescription string
+	RangeMin       int
+	RangeMax       int
 }
 
 type OutputRegisterLink struct {
-	Address     string
-	Description string
-	Valid       bool
-	Success     bool
+	Address        string
+	ShowName       string
+	Description    string
+	CalSummary     string
+	CalDescription string
+	RangeMin       int
+	RangeMax       int
+	Valid          bool
+	Success        bool
 }
 
 func (uc Usecase) RegisterLink(in InputRegisterLink) OutputRegisterLink {
@@ -125,17 +149,30 @@ func (uc Usecase) RegisterLink(in InputRegisterLink) OutputRegisterLink {
 		}
 	}
 
-	if in.Description != "" {
-		link, success, _ := uc.Service.UpdateLinkDescription(in.Uid, in.Description)
-		return OutputRegisterLink{
-			Address:     link.Address,
-			Description: link.Description,
-			Valid:       true,
-			Success:     success,
-		}
+	next := &domain.Link{
+		ID:             0,
+		UserID:         0,
+		Address:        "",
+		ShowName:       in.ShowName,
+		Description:    in.Description,
+		CalSummary:     in.CalSummary,
+		CalDescription: in.CalDescription,
+		RangeMin:       in.RangeMin,
+		RangeMax:       in.RangeMax,
 	}
+	link, success, _ := uc.Service.UpdateLinkOptions(in.Uid, next)
 
-	return OutputRegisterLink{}
+	return OutputRegisterLink{
+		Address:        link.Address,
+		ShowName:       link.ShowName,
+		Description:    link.Description,
+		CalSummary:     link.CalSummary,
+		CalDescription: link.CalDescription,
+		RangeMin:       link.RangeMin,
+		RangeMax:       link.RangeMax,
+		Valid:          true,
+		Success:        success,
+	}
 }
 
 type InputVisit struct {
@@ -143,14 +180,30 @@ type InputVisit struct {
 }
 
 type OutputVisit struct {
-	Exist       bool
-	Name        string
-	Description string
+	Exist          bool
+	Name           string
+	Address        string
+	ShowName       string
+	Description    string
+	CalSummary     string
+	CalDescription string
+	RangeMin       int
+	RangeMax       int
 }
 
 func (uc Usecase) Visit(in InputVisit) OutputVisit {
 	user, link, exist := uc.Service.GetUserByAddress(in.Address)
-	return OutputVisit{Exist: exist, Name: user.Name, Description: link.Description}
+	return OutputVisit{
+		Exist:          exist,
+		Name:           user.Name,
+		Address:        link.Address,
+		ShowName:       link.ShowName,
+		Description:    link.Description,
+		CalSummary:     link.CalSummary,
+		CalDescription: link.CalDescription,
+		RangeMin:       link.RangeMin,
+		RangeMax:       link.RangeMax,
+	}
 }
 
 type InputCheckCalender struct {

@@ -9,11 +9,12 @@ export interface UserData {
     valid: boolean
     name: string
     email: string
+    showName: string
     description: string
-    title: string
-    body: string
-    rangeMin: string
-    rangeMax: string
+    calSummary: string
+    calDescription: string
+    rangeMin: number
+    rangeMax: number
 }
 
 export interface Form {
@@ -23,9 +24,10 @@ export interface Form {
 }
 
 export interface SettingForm {
+    showName: string
     description: string
-    title: string
-    body: string
+    calSummary: string
+    calDescription: string
     rangeMin: string
     rangeMax: string
     warning: string
@@ -41,13 +43,67 @@ export interface FormInput {
 
 export interface SettingFormInput {
     onEnter: () => void
+    showName: FormInput
     description: FormInput
-    title: FormInput
-    body: FormInput
+    calSummary: FormInput
+    calDescription: FormInput
     rangeMin: FormInput
     rangeMax: FormInput
     warning: string
 }
+
+// utility
+
+
+export function initUserData(): UserData {
+    return {
+        address: '',
+        valid: false,
+        name: '',
+        email: '',
+        showName: '',
+        description: '',
+        calSummary: '',
+        calDescription: '',
+        rangeMin: 0,
+        rangeMax: 0,
+    }
+}
+
+export function resToUserData(r: any): UserData {
+    return {
+        address: r.address,
+        valid: r.address_valid,
+        name: r.name,
+        email: r.email,
+        showName: r.show_name,
+        description: r.description,
+        calSummary: r.cal_summary,
+        calDescription: r.cal_description,
+        rangeMin: r.range_min == undefined ? 0 : r.range_min,
+        rangeMax: r.range_max == undefined ? 0 : r.range_max,
+    }
+}
+
+export function transTimeRange(next: string, old: string): string {
+    if (/^[0-9]{0,2}$/.test(next)) {
+        return next
+    } else {
+        return old
+    }
+}
+
+export function formToQuery(form: SettingForm): any {
+    return {
+        show_name: form.showName,
+        description: form.description,
+        cal_summary: form.calSummary,
+        cal_description: form.calDescription,
+        range_min: form.rangeMin,
+        range_max: form.rangeMax,
+    }
+}
+
 
 // actions
 const actionCreator = actionCreatorFactory()
@@ -85,11 +141,12 @@ const initState: State = {
         valid: false,
         name: '',
         email: '',
+        showName: '',
         description: '',
-        title: '',
-        body: '',
-        rangeMin: '',
-        rangeMax: '',
+        calSummary: '',
+        calDescription: '',
+        rangeMin: 0,
+        rangeMax: 0,
     },
     addressForm: {
         timerId: -1,
@@ -97,9 +154,10 @@ const initState: State = {
         warning: ''
     },
     settingForm: {
+        showName: '',
         description: '',
-        title: '',
-        body: '',
+        calSummary: '',
+        calDescription: '',
         rangeMin: '',
         rangeMax: '',
         warning: ''   
@@ -119,16 +177,18 @@ export const Reducer = reducerWithInitialState(initState)
                 warning: ''
             },
             settingForm: data.valid ? {
+                showName: data.showName,
                 description: data.description,
-                title: data.title,
-                body: data.body,
-                rangeMin: data.rangeMin,
-                rangeMax: data.rangeMax,
+                calSummary: data.calSummary,
+                calDescription: data.calDescription,
+                rangeMin: data.rangeMin.toString(),
+                rangeMax: data.rangeMax.toString(),
                 warning: '',
             } : {
+                showName: '',
                 description: '',
-                title: '',
-                body: '',
+                calSummary: '',
+                calDescription: '',
                 rangeMin: '',
                 rangeMax: '',
                 warning: '',

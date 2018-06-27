@@ -27,10 +27,15 @@ type Token struct {
 
 type Link struct {
 	gorm.Model
-	User        User
-	UserID      uint
-	Address     string `type:varchar(128);gorm:"unique"`
-	Description string
+	User           User
+	UserID         uint
+	Address        string `type:varchar(128);gorm:"unique"`
+	ShowName       string
+	Description    string
+	CalSummary     string
+	CalDescription string
+	RangeMin       int
+	RangeMax       int
 }
 
 type Session struct {

@@ -29,8 +29,17 @@ func GenerateSessionHash(str string) (string, int64) {
 	return hash, expire
 }
 
-func GenerateDefaultLinkDescription() string {
-	return "おいでやす"
+func GenerateDefaultLink(uid uint, address string, name string) *Link {
+	return &Link{
+		UserID:         uid,
+		Address:        address,
+		ShowName:       name,
+		Description:    "おいでやす",
+		CalSummary:     "",
+		CalDescription: "",
+		RangeMin:       9,
+		RangeMax:       23,
+	}
 }
 
 func ToExpire(expiresIn int) int64 {

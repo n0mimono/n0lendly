@@ -71,23 +71,29 @@ export const SettingUpdate: React.SFC<SettingUpdateProps> = (props) => {
     let form = props.form
     return (
         <div className={styles.dashboard.settingUpdateList}>
+            <SettingUpdateItem title={"表示名"} >
+                <CustomInput className={styles.dashboard.input}
+                    onChange={t => form.showName.onChange(t)}
+                    placeholder={""} value={form.showName.value}
+                />
+            </SettingUpdateItem>
             <SettingUpdateItem title={"説明文"} >
                 <CustomInput className={styles.dashboard.input}
                     onChange={t => form.description.onChange(t)}
-                    placeholder={"おいでやす"} value={form.description.value}
+                    placeholder={""} value={form.description.value}
                     multiline={true} rows={3} rowsMax={3}
                 />
             </SettingUpdateItem>
             <SettingUpdateItem title={"予定タイトル"} >
                 <CustomInput className={styles.dashboard.input}
-                    onChange={t => form.title.onChange(t)}
-                    placeholder={""} value={form.title.value}
+                    onChange={t => form.calSummary.onChange(t)}
+                    placeholder={""} value={form.calSummary.value}
                 />
             </SettingUpdateItem>
             <SettingUpdateItem title={"予定本文"} >
                 <CustomInput className={styles.dashboard.input}
-                    onChange={t => form.body.onChange(t)}
-                    placeholder={""} value={form.body.value}
+                    onChange={t => form.calDescription.onChange(t)}
+                    placeholder={""} value={form.calDescription.value}
                     multiline={true} rows={2} rowsMax={2}
                 />
             </SettingUpdateItem>
@@ -97,7 +103,7 @@ export const SettingUpdate: React.SFC<SettingUpdateProps> = (props) => {
                         onChange={t => form.rangeMin.onChange(t)}
                         placeholder={""} value={form.rangeMin.value}
                     />
-                    <div>時　〜　</div>
+                    <div>時　-　</div>
                     <CustomInput className={styles.dashboard.input}
                         onChange={t => form.rangeMax.onChange(t)}
                         placeholder={""} value={form.rangeMax.value}
@@ -109,6 +115,9 @@ export const SettingUpdate: React.SFC<SettingUpdateProps> = (props) => {
                 <BaseButton color="primary" onClick={() => props.form.onEnter()}>
                     登録する
                 </BaseButton>
+                <div className={styles.dashboard.warning}>
+                    {form.warning}
+                </div>
             </div>
         </div>
     )

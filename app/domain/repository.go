@@ -17,10 +17,15 @@ type Token struct {
 }
 
 type Link struct {
-	ID          uint
-	UserID      uint
-	Address     string
-	Description string
+	ID             uint
+	UserID         uint
+	Address        string
+	ShowName       string
+	Description    string
+	CalSummary     string
+	CalDescription string
+	RangeMin       int
+	RangeMax       int
 }
 
 type Session struct {

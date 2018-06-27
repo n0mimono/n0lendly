@@ -27,7 +27,7 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
             <VisitBase
                 address={props.user.address}
                 valid={props.user.exist}
-                name={props.user.name}
+                name={props.user.showName}
                 description={props.user.description}
                 onLeftClick={
                     props.pages.index == 1 ? () => props.onPage0({}) :
@@ -49,6 +49,8 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
                         <VisitCalender
                             calender={props.calender}
                             calenderPage={props.pages.page1.cp}
+                            rangeMin={props.user.rangeMin}
+                            rangeMax={props.user.rangeMax}
                             onLeftClick={
                                 props.pages.page1.cp.index == 0 ? undefined :
                                     () => {
@@ -71,6 +73,8 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
                         address={props.user.address}
                         name={props.user.name}
                         time={props.pages.page2.time}
+                        initSummary={props.user.calSummary}
+                        initDescription={props.user.calDescription}
                         onConfirm={props.onRequest}
                         confirm={props.confirm}
                     />
