@@ -143,7 +143,7 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
             api('/api/account/', 'POST', { address: form.value })
             .then(r => {
                 if (r.success) {
-                    dispatch(Dashboard.actions.init(Dashboard.resToUserData(r)))    
+                    dispatch(Dashboard.actions.updateUserData(Dashboard.resToUserData(r)))    
                 }
 
                 window.clearTimeout(form.timerId)
