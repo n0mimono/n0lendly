@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { VisitBase, VisitEnter, VisitCalender, VisitConfirm, VisitResult } from './CompVisit';
+import { VisitBase, VisitEnter, VisitCalender, VisitConfirm, VisitResult, VisitFooter } from './CompVisit';
 
 import * as Visit from '../modules/visit'
 import { Loading, ViewItem, Views } from './Common'
@@ -22,8 +22,6 @@ interface PresenterProps {
 export const Presenter: React.SFC<PresenterProps> = (props) => {
     return (
         <div>
-            {
-            props.pages.index == 3 ? undefined :
             <VisitBase
                 address={props.user.address}
                 valid={props.user.exist}
@@ -39,7 +37,6 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
                     undefined
                 }
             />
-            }
             <Views index={props.pages.index} valid={props.user.exist}>
                 <ViewItem>
                     <VisitEnter onClick={() => props.onPage1(props.pages.page1)} />
@@ -84,9 +81,11 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
                         time={props.pages.page2.time}
                         recvName={props.user.name}
                         sendName={props.pages.page3.name}
+                        nextGuide={props.user.nextGuide}
                     />
                 </ViewItem>
             </Views>
+            <VisitFooter />
         </div>
     )
 }

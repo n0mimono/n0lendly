@@ -109,6 +109,21 @@ const BaseSideButtons: React.SFC<BaseSideButtonsProps> = (props) => {
     )
 }
 
+interface VisitFooterProps {
+}
+
+export const VisitFooter: React.SFC<VisitFooterProps> = (props) => {
+    return (
+        <div className={styles.visit.footer}>
+            <div className={styles.visit.content}>
+                powerd by <a href="/" onClick={() => window.location.href = "/"}>
+                    {utility.AppName()}
+                </a>.
+            </div>
+        </div>
+    )
+}
+
 const BaseNotFound: React.SFC<{}> = (props) => {
     return (
         <div className={styles.visit.baseNotFound}>
@@ -206,7 +221,9 @@ interface CalenderBodyProps {
 const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
     let table = props.table
 
-    let xWeeks = []
+    let xTimes = []
+    let xDays = []
+
     for (let i = 0; i < table.days.length; i++) {
         let day = table.days[i]
 
@@ -215,18 +232,26 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
             if (j < props.rangeMin || j > props.rangeMax) continue
             let hour = day.hours[j]
 
+            // left side
+            if (i == 0) {
+                xTimes.push(
+                    <div key={j} className={styles.visit.rowItem}>
+                        {utility.toHourFormat(hour.time)}
+                    </div>
+                )    
+            }
+
+            // right side
             xHour.push(
                 <div key={j}>
-                    <ListItem className={styles.visit.hour}>
-                        <BaseButton color="inherit"
-                            onClick={() => props.onItemClick(hour.time)}
-                            border={false}
-                            disabled={hour.isReserved}
-                        >
-                            {utility.toHourFormat(hour.time)}
-                        </BaseButton>
-                    </ListItem>
-                    <Divider />
+                    <div className={styles.visit.hour}>
+                        {
+                            hour.isReserved ? undefined :
+                            <div className={styles.visit.nreserved}
+                                onClick={() => props.onItemClick(hour.time)}>
+                            </div>
+                        }
+                    </div>
                 </div>
             )
         }
@@ -238,22 +263,20 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
         let sd = w == 0 ? styles.visit.sunday :
             w == 6 ? styles.visit.saturday : styles.visit.weekday
 
-        xWeeks.push(
+        xDays.push(
             <div key={i}>
-                <div className={styles.visit.day}>
+                <div className={styles.visit.header}>
                     <CustomPaper className={styles.visit.paper}>
                         <div className={styles.visit.inner}>
                             <div className={sd}>
-                                <div className={styles.visit.dayDate}>{xDay}</div>
-                                <div className={styles.visit.dayWeek}>{xDw}</div>
+                                <div className={styles.visit.day}>{xDay}</div>
+                                <div className={styles.visit.week}>{xDw}</div>
                             </div>
                         </div>
                     </CustomPaper>
                 </div>
                 <div className={styles.visit.hours}>
-                    <List>
-                        {xHour}
-                    </List>
+                    {xHour}
                 </div>
             </div>
         )
@@ -261,7 +284,13 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
 
     return (
         <div className={styles.visit.calenderBody}>
-            {xWeeks}
+            <div className={styles.visit.left}>
+                <div className={styles.visit.rowHead}></div>
+                {xTimes}
+            </div>
+            <div className={styles.visit.right}>
+                {xDays}
+            </div>
         </div>
     )
 }
@@ -323,12 +352,7 @@ export class VisitConfirm extends React.Component<VisitConfirmProps> {
             <div>
                 <SubHeader>Confirm Information</SubHeader>
                 <div className={styles.visit.confirm}>
-                    <SubPaper title="予定の日時">
-                        <ConfirmForm
-                            title={"名前"}
-                            value={props.name}
-                            disabled={true}
-                        />
+                    <SubPaper title="予約">
                         <ConfirmForm
                             title={"日付"}
                             value={utility.toDateFullFormat(props.time)}
@@ -338,18 +362,6 @@ export class VisitConfirm extends React.Component<VisitConfirmProps> {
                             title={"時間"}
                             value={utility.toHourDurationFormat(props.time)}
                             disabled={true}
-                        />
-                    </SubPaper>
-                    <SubPaper title="詳細の入力">
-                        <ConfirmForm
-                            title={"名前"}
-                            onChange={t => this.formName = t}
-                            placeholder={"Mio Maruyama"}
-                        />
-                        <ConfirmForm
-                            title={"メール"}
-                            onChange={t => this.formEmail = t}
-                            placeholder={"example@gmail.com"}
                         />
                         <ConfirmForm
                             title={"予定名"}
@@ -362,6 +374,18 @@ export class VisitConfirm extends React.Component<VisitConfirmProps> {
                             onChange={t => this.formDescription = t}
                             placeholder={""}
                             defaultValue={props.initDescription}
+                        />
+                    </SubPaper>
+                    <SubPaper title="詳細">
+                        <ConfirmForm
+                            title={"名前"}
+                            onChange={t => this.formName = t}
+                            placeholder={"Mio Maruyama"}
+                        />
+                        <ConfirmForm
+                            title={"メール"}
+                            onChange={t => this.formEmail = t}
+                            placeholder={"example@gmail.com"}
                         />
                         <ConfirmButton
                             onClick={() => props.onConfirm({
@@ -443,6 +467,7 @@ interface VisitResultProps {
     time: string
     recvName: string
     sendName: string
+    nextGuide: string
 }
 
 export const VisitResult: React.SFC<VisitResultProps> = (props) => {
@@ -467,41 +492,25 @@ export const VisitResult: React.SFC<VisitResultProps> = (props) => {
                             value={utility.toHourDurationFormat(props.time)}
                             disabled={true}
                         />
-                        <ConfirmForm
-                            title={"相手"}
-                            value={props.recvName}
-                            disabled={true}
-                        />
-                        <ConfirmForm
-                            title={"自分"}
-                            value={props.sendName}
-                            disabled={true}
-                        />
                     </SubPaper>
                     <SubPaper title="次に">
-                        <ResultMore />
+                        <ResultMore description={props.nextGuide} />
                     </SubPaper>
                 </div>
-
             </div>
         </div>
     )
 }
 
-export const ResultMore: React.SFC<{}> = (props) => {
+interface ResultMoreProps {
+    description: string
+}
+
+export const ResultMore: React.SFC<ResultMoreProps> = (props) => {
     return (
         <div className={styles.visit.resultMore}>
             <div className={styles.visit.next}>
-                <BaseButton color="primary"
-                    onClick={() => window.location.reload()}>
-                    さらに予約をする
-                </BaseButton>
-            </div>
-            <div className={styles.visit.next}>
-                <BaseButton color="primary"
-                    onClick={() => window.location.href = "/"}>
-                    ホストとしてはじめる
-                </BaseButton>
+                {props.description}
             </div>
         </div>
     )
