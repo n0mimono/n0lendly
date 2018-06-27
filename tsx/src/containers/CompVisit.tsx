@@ -116,7 +116,7 @@ export const VisitFooter: React.SFC<VisitFooterProps> = (props) => {
     return (
         <div className={styles.visit.footer}>
             <div className={styles.visit.content}>
-                powerd by <a href="/" onClick={() => window.location.href = "/"}>
+                powered by <a href="/" onClick={() => window.location.href = "/"}>
                     {utility.AppName()}
                 </a>.
             </div>
