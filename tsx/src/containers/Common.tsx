@@ -85,7 +85,7 @@ export const Views: React.SFC<ViewsProps> = (props) => {
         <div>
         {
             !props.valid ? "" :
-                <SwipeableViews index={props.index} draggable={false}>
+                <SwipeableViews index={props.index} disabled={true}>
                     {props.children}
                 </SwipeableViews>
         }
