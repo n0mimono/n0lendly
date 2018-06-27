@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { CircularProgress, Divider } from 'material-ui'
+import { CircularProgress, Divider, Checkbox } from 'material-ui'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
@@ -194,6 +194,34 @@ export const CustomInput: React.SFC<InputProps & CustomProps> = (props) => {
             rows={props.rows}
             rowsMax={props.rowsMax}
             defaultValue={props.defaultValue}
+            className={props.className}
+        />
+    )
+}
+
+interface CheckboxProps {
+    color?: 'inherit' | 'primary' | 'secondary' | 'default'
+    onChange: (b: boolean) => void
+    checked: boolean
+}
+
+export const BaseCheckbox: React.SFC<CheckboxProps> = (props) => {
+    return (
+        <CustomCheckbox
+            color={props.color}
+            onChange={props.onChange}
+            checked={props.checked}
+            className={styles.common.baseCheckbox}
+        />
+    )
+}
+
+export const CustomCheckbox: React.SFC<CheckboxProps & CustomProps> = (props) => {
+    return (
+        <Checkbox
+            color={props.color}
+            onChange={t => props.onChange(!props.checked)}
+            checked={props.checked}
             className={props.className}
         />
     )

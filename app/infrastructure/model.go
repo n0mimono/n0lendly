@@ -78,6 +78,8 @@ func (link Link) in(l *domain.Link) Link {
 		CalDescription: l.CalDescription,
 		RangeMin:       l.RangeMin,
 		RangeMax:       l.RangeMax,
+		VisibleWeek:    l.VisibleWeek,
+		NextGuide:      l.NextGuide,
 	}
 	ret.ID = l.ID
 	return ret
@@ -94,6 +96,8 @@ func (link Link) out() *domain.Link {
 		CalDescription: link.CalDescription,
 		RangeMin:       link.RangeMin,
 		RangeMax:       link.RangeMax,
+		VisibleWeek:    link.VisibleWeek,
+		NextGuide:      link.NextGuide,
 	}
 }
 

@@ -57,6 +57,8 @@ type OutAccount struct {
 	CalDescription string `json:"cal_description"`
 	RangeMin       int    `json:"range_min"`
 	RangeMax       int    `json:"range_max"`
+	VisibleWeek    int    `json:"visible_week"`
+	NextGuide      string `json:"next_guide"`
 	Success        bool   `json:"success"`
 }
 
@@ -84,6 +86,8 @@ func (in *ApiAccountGet) ServeHTTP(w http.ResponseWriter, r *http.Request, user 
 		CalDescription: link.CalDescription,
 		RangeMin:       link.RangeMin,
 		RangeMax:       link.RangeMax,
+		VisibleWeek:    link.VisibleWeek,
+		NextGuide:      link.NextGuide,
 		Success:        true,
 	}
 	executeJson(w, data)
@@ -101,6 +105,8 @@ type ApiAccountPost struct {
 	CalDescription string `json:"cal_description"`
 	RangeMin       int    `json:"range_min"`
 	RangeMax       int    `json:"range_max"`
+	VisibleWeek    int    `json:"visible_week"`
+	NextGuide      string `json:"next_guide"`
 }
 
 func (in *ApiAccountPost) ServeHTTP(w http.ResponseWriter, r *http.Request, user *domain.User) {
@@ -113,6 +119,8 @@ func (in *ApiAccountPost) ServeHTTP(w http.ResponseWriter, r *http.Request, user
 		CalDescription: in.CalDescription,
 		RangeMin:       in.RangeMin,
 		RangeMax:       in.RangeMax,
+		VisibleWeek:    in.VisibleWeek,
+		NextGuide:      in.NextGuide,
 	})
 	data := OutAccount{
 		Name:           user.Name,
@@ -126,6 +134,8 @@ func (in *ApiAccountPost) ServeHTTP(w http.ResponseWriter, r *http.Request, user
 		CalDescription: link.CalDescription,
 		RangeMin:       link.RangeMin,
 		RangeMax:       link.RangeMax,
+		VisibleWeek:    link.VisibleWeek,
+		NextGuide:      link.NextGuide,
 		Success:        link.Success,
 	}
 	executeJson(w, data)
@@ -188,6 +198,8 @@ type OutVisit struct {
 	CalDescription string `json:"cal_description"`
 	RangeMin       int    `json:"range_min"`
 	RangeMax       int    `json:"range_max"`
+	VisibleWeek    int    `json:"visible_week"`
+	NextGuide      string `json:"next_guide"`
 }
 
 func ApiVisit(w http.ResponseWriter, r *http.Request) {
@@ -212,6 +224,8 @@ func (in *ApiVisitGet) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		CalDescription: visit.CalDescription,
 		RangeMin:       visit.RangeMin,
 		RangeMax:       visit.RangeMax,
+		VisibleWeek:    visit.VisibleWeek,
+		NextGuide:      visit.NextGuide,
 	}
 	executeJson(w, data)
 }

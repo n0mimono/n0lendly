@@ -37,8 +37,10 @@ func GenerateDefaultLink(uid uint, address string, name string) *Link {
 		Description:    "おいでやす",
 		CalSummary:     "",
 		CalDescription: "",
-		RangeMin:       9,
-		RangeMax:       23,
+		RangeMin:       10,
+		RangeMax:       19,
+		VisibleWeek:    62,
+		NextGuide:      "またね！",
 	}
 }
 

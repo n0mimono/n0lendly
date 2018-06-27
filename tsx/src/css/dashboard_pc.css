@@ -46,6 +46,10 @@
     width: 25px;
 }
 
+.settingUpdateList .week {
+    display: flex;
+}
+
 .settingUpdateList .enter {
     display: flex;
     padding: 10px 158px;

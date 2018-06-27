@@ -3,7 +3,7 @@ import * as React from 'react'
 import { List, ListItem } from 'material-ui';
 import Typography from 'material-ui/Typography'
 
-import { Tp, BaseButton, BasePaper, BaseIcon, BaseInput, CustomInput } from './Common'
+import { Tp, BaseButton, BasePaper, BaseIcon, BaseInput, CustomInput, BaseCheckbox } from './Common'
 import * as utility from '../modules/utility'
 import * as Dashboard from '../modules/dashboard'
 
@@ -69,6 +69,7 @@ interface SettingUpdateProps {
 
 export const SettingUpdate: React.SFC<SettingUpdateProps> = (props) => {
     let form = props.form
+    let visibleWeekMask = Dashboard.decodeWeekMask(form.visibleWeek.value)
     return (
         <div className={styles.dashboard.settingUpdateList}>
             <SettingUpdateItem title={"表示名"} >
@@ -110,6 +111,22 @@ export const SettingUpdate: React.SFC<SettingUpdateProps> = (props) => {
                     />
                     <div>時</div>
                 </div>
+            </SettingUpdateItem>
+            <SettingUpdateItem title={"表示する曜日"} >
+                <div className={styles.dashboard.week}>
+                    {["日", "月", "火", "水", "木", "金", "土"].map((v, i) => <div key={i}>
+                        <BaseCheckbox onChange={
+                            b => form.visibleWeek.onChange(Dashboard.transWeekMask(visibleWeekMask, i))}
+                            checked={(visibleWeekMask & 2**i) != 0} color={"default"} /> {v}
+                    </div>)}
+                </div>
+            </SettingUpdateItem>
+            <SettingUpdateItem title={"登録後の説明文"} >
+                <CustomInput className={styles.dashboard.input}
+                    onChange={t => form.nextGuide.onChange(t)}
+                    placeholder={""} value={form.nextGuide.value}
+                    multiline={true} rows={4} rowsMax={2}
+                />
             </SettingUpdateItem>
             <div className={styles.dashboard.enter}>
                 <BaseButton color="primary" onClick={() => props.form.onEnter()}>

@@ -14,6 +14,7 @@ export interface UserData {
     calDescription: string
     rangeMin: number
     rangeMax: number
+    visibleWeek: number
     nextGuide: string
 }
 
@@ -28,6 +29,7 @@ export function errToUserData(address: string): UserData {
         calDescription: '',
         rangeMin: 0,
         rangeMax: 0,
+        visibleWeek: 0,
         nextGuide: '',
     }
 }
@@ -43,6 +45,7 @@ export function resToUserData(r: any): UserData {
         calDescription: r.cal_description,
         rangeMin: r.range_min == undefined ? 0 : r.range_min,
         rangeMax: r.range_max == undefined ? 0 : r.range_max,
+        visibleWeek: r.visible_week == undefined ? 0 : r.visible_week,
         nextGuide: r.next_guide,
     }
 }
@@ -170,6 +173,7 @@ const initState: State = {
         calDescription: '',
         rangeMin: 0,
         rangeMax: 0,
+        visibleWeek: 0,
         nextGuide: '',
     },
     calender: {

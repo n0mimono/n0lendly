@@ -48,6 +48,7 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
                             calenderPage={props.pages.page1.cp}
                             rangeMin={props.user.rangeMin}
                             rangeMax={props.user.rangeMax}
+                            visibleWeek={props.user.visibleWeek}
                             onLeftClick={
                                 props.pages.page1.cp.index == 0 ? undefined :
                                     () => {

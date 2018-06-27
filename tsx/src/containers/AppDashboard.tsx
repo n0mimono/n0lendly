@@ -72,6 +72,14 @@ export class Component extends React.Component<Props> {
                                     rangeMax: Dashboard.transTimeRange(t, setting.rangeMax) }),
                                 value: setting.rangeMax,
                             },
+                            visibleWeek: {
+                                onChange: t => props.watchSetting({ ...setting, visibleWeek: t }),
+                                value: setting.visibleWeek,
+                            },
+                            nextGuide: {
+                                onChange: t => props.watchSetting({ ...setting, nextGuide: t }),
+                                value: setting.nextGuide,
+                            },
                             warning: props.settingForm.warning,
                         }}
                    />

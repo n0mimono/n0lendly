@@ -26,6 +26,8 @@ type Link struct {
 	CalDescription string
 	RangeMin       int
 	RangeMax       int
+	VisibleWeek    int
+	NextGuide      string
 }
 
 type Session struct {

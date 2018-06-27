@@ -45,6 +45,10 @@
     font-size: 7vw;
 }
 
+.settingUpdateList .week {
+    display: flex;
+}
+
 .settingUpdateList .enter {
     padding: 2vw;
     display: flex;

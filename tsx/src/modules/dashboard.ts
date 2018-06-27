@@ -15,6 +15,8 @@ export interface UserData {
     calDescription: string
     rangeMin: number
     rangeMax: number
+    visibleWeek: number
+    nextGuide: string
 }
 
 export interface Form {
@@ -30,6 +32,8 @@ export interface SettingForm {
     calDescription: string
     rangeMin: string
     rangeMax: string
+    visibleWeek: string
+    nextGuide: string
     warning: string
 }
 
@@ -49,6 +53,8 @@ export interface SettingFormInput {
     calDescription: FormInput
     rangeMin: FormInput
     rangeMax: FormInput
+    visibleWeek: FormInput
+    nextGuide: FormInput
     warning: string
 }
 
@@ -67,6 +73,8 @@ export function initUserData(): UserData {
         calDescription: '',
         rangeMin: 0,
         rangeMax: 0,
+        visibleWeek: 0,
+        nextGuide: '',
     }
 }
 
@@ -82,6 +90,8 @@ export function resToUserData(r: any): UserData {
         calDescription: r.cal_description,
         rangeMin: r.range_min == undefined ? 0 : r.range_min,
         rangeMax: r.range_max == undefined ? 0 : r.range_max,
+        visibleWeek: r.visible_week == undefined ? 0 : r.visible_week,
+        nextGuide: r.next_guide,
     }
 }
 
@@ -101,9 +111,26 @@ export function formToQuery(form: SettingForm): any {
         cal_description: form.calDescription,
         range_min: form.rangeMin,
         range_max: form.rangeMax,
+        visible_week: form.visibleWeek,
+        next_guide: form.nextGuide,
     }
 }
 
+export function decodeWeekMask(code: string): number {
+    let v = 0
+    if (/^[0-9]{1,3}$/.test(code)) {
+        v = parseInt(code)
+    }
+    return v
+}
+
+export function transWeekMask(mask: number, index: number): string {
+    if ((mask & 2**index) != 0) {
+        return (mask ^ 2**index).toString()
+    } else {
+        return (mask | 2**index).toString()
+    }
+}
 
 // actions
 const actionCreator = actionCreatorFactory()
@@ -147,6 +174,8 @@ const initState: State = {
         calDescription: '',
         rangeMin: 0,
         rangeMax: 0,
+        visibleWeek: 0,
+        nextGuide: '',
     },
     addressForm: {
         timerId: -1,
@@ -160,6 +189,8 @@ const initState: State = {
         calDescription: '',
         rangeMin: '',
         rangeMax: '',
+        visibleWeek: '',
+        nextGuide: '',
         warning: ''   
     }
 }
@@ -183,6 +214,8 @@ export const Reducer = reducerWithInitialState(initState)
                 calDescription: data.calDescription,
                 rangeMin: data.rangeMin.toString(),
                 rangeMax: data.rangeMax.toString(),
+                visibleWeek: data.visibleWeek.toString(),
+                nextGuide: data.nextGuide,
                 warning: '',
             } : {
                 showName: '',
@@ -191,6 +224,8 @@ export const Reducer = reducerWithInitialState(initState)
                 calDescription: '',
                 rangeMin: '',
                 rangeMax: '',
+                visibleWeek: '',
+                nextGuide: '',
                 warning: '',
             }
         }

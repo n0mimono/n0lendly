@@ -188,6 +188,7 @@ interface VisitCalenderProps {
     calenderPage: Visit.CalenderPage
     rangeMin: number
     rangeMax: number
+    visibleWeek: number
 
     onLeftClick?: () => void
     onRightClick?: () => void
@@ -205,7 +206,7 @@ export const VisitCalender: React.SFC<VisitCalenderProps> = (props) => {
             <SubHeader>Select a Time</SubHeader>
             <CalenderClick onLeftClick={props.onLeftClick} onRightClick={props.onRightClick} />
             <CalenderBody table={table} onItemClick={props.onItemClick}
-                rangeMin={props.rangeMin} rangeMax={props.rangeMax} />
+                rangeMin={props.rangeMin} rangeMax={props.rangeMax} visibleWeek={props.visibleWeek} />
         </div>
     )
 }
@@ -214,6 +215,7 @@ interface CalenderBodyProps {
     table: utility.CalenderTable
     rangeMin: number
     rangeMax: number
+    visibleWeek: number
 
     onItemClick: (v: string) => void
 }
@@ -224,24 +226,29 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
     let xTimes = []
     let xDays = []
 
+    if (table.days.length > 0) {
+        let day = table.days[0]
+        for (let j = 0; j < day.hours.length; j++) {
+            if (j < props.rangeMin || j > props.rangeMax) continue
+            let hour = day.hours[j]
+
+            xTimes.push(
+                <div key={j} className={styles.visit.rowItem}>
+                    {utility.toHourFormat(hour.time)}
+                </div>
+            )    
+        }
+    }
+
     for (let i = 0; i < table.days.length; i++) {
         let day = table.days[i]
+        if ((props.visibleWeek & 2**utility.weekIndex(day.time)) == 0) continue
 
         let xHour = []
         for (let j = 0; j < day.hours.length; j++) {
             if (j < props.rangeMin || j > props.rangeMax) continue
             let hour = day.hours[j]
 
-            // left side
-            if (i == 0) {
-                xTimes.push(
-                    <div key={j} className={styles.visit.rowItem}>
-                        {utility.toHourFormat(hour.time)}
-                    </div>
-                )    
-            }
-
-            // right side
             xHour.push(
                 <div key={j}>
                     <div className={styles.visit.hour}>

@@ -34,6 +34,8 @@ type OutputCheckLink struct {
 	CalDescription string
 	RangeMin       int
 	RangeMax       int
+	VisibleWeek    int
+	NextGuide      string
 }
 
 func (uc Usecase) CheckLink(in InputCheckLink) OutputCheckLink {
@@ -47,6 +49,8 @@ func (uc Usecase) CheckLink(in InputCheckLink) OutputCheckLink {
 		CalDescription: link.CalDescription,
 		RangeMin:       link.RangeMin,
 		RangeMax:       link.RangeMax,
+		VisibleWeek:    link.VisibleWeek,
+		NextGuide:      link.NextGuide,
 	}
 }
 
@@ -119,6 +123,8 @@ type InputRegisterLink struct {
 	CalDescription string
 	RangeMin       int
 	RangeMax       int
+	VisibleWeek    int
+	NextGuide      string
 }
 
 type OutputRegisterLink struct {
@@ -129,6 +135,8 @@ type OutputRegisterLink struct {
 	CalDescription string
 	RangeMin       int
 	RangeMax       int
+	VisibleWeek    int
+	NextGuide      string
 	Valid          bool
 	Success        bool
 }
@@ -159,6 +167,8 @@ func (uc Usecase) RegisterLink(in InputRegisterLink) OutputRegisterLink {
 		CalDescription: in.CalDescription,
 		RangeMin:       in.RangeMin,
 		RangeMax:       in.RangeMax,
+		VisibleWeek:    in.VisibleWeek,
+		NextGuide:      in.NextGuide,
 	}
 	link, success, _ := uc.Service.UpdateLinkOptions(in.Uid, next)
 
@@ -170,6 +180,8 @@ func (uc Usecase) RegisterLink(in InputRegisterLink) OutputRegisterLink {
 		CalDescription: link.CalDescription,
 		RangeMin:       link.RangeMin,
 		RangeMax:       link.RangeMax,
+		VisibleWeek:    link.VisibleWeek,
+		NextGuide:      link.NextGuide,
 		Valid:          true,
 		Success:        success,
 	}
@@ -189,6 +201,8 @@ type OutputVisit struct {
 	CalDescription string
 	RangeMin       int
 	RangeMax       int
+	VisibleWeek    int
+	NextGuide      string
 }
 
 func (uc Usecase) Visit(in InputVisit) OutputVisit {
@@ -203,6 +217,8 @@ func (uc Usecase) Visit(in InputVisit) OutputVisit {
 		CalDescription: link.CalDescription,
 		RangeMin:       link.RangeMin,
 		RangeMax:       link.RangeMax,
+		VisibleWeek:    link.VisibleWeek,
+		NextGuide:      link.NextGuide,
 	}
 }
 

@@ -95,7 +95,7 @@ export function calcCalenderTable(table: CalenderTable, evs: Visit.CalenderEvent
 }
 
 export function weekNames(index: number): string {
-    return ['Sun', 'Mon', 'Tue', 'We', 'Thu', 'Fri', 'Sat'][index]
+    return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][index]
 }
 
 export function weekIndex(time: string): number {
