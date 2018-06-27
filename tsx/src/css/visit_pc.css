@@ -296,6 +296,7 @@
 
 .resultMore .next {
     padding: 12px;
+    white-space: pre;
 }
 
 /* ---------------------------------------- */
