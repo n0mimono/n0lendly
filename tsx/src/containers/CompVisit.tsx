@@ -256,6 +256,9 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
                             hour.isReserved ? undefined :
                             <div className={styles.visit.nreserved}
                                 onClick={() => props.onItemClick(hour.time)}>
+                                <div>
+                                    {utility.toHourFormat(hour.time)}
+                                </div>
                             </div>
                         }
                     </div>

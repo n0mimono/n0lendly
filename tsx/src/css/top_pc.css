@@ -3,7 +3,43 @@
 .root {
     display: flex;
     justify-content: center;
-    padding: 80px;
+    padding: 130px;
+    background: url("/imgs/lp.jpg");
+    height: 600px;
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+.root .content {
+    display: block;
+    justify-content: center;
+}
+
+.root .title {
+    text-align: center;
+    color: #FFF;
+    padding: 50px 0px 0px 0px;
+    font-size: 60px;
+    font-weight: 100;
+}
+
+.root .sub {
+    text-align: center;
+    color: #FFF;
+    padding: 10px 0px 60px 0px;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.root .start {
+    text-align: center
+}
+
+.root .button {
+    padding: 10px 20px !important;
+    border: solid 2px !important;
+    border-radius: 2px !important;
+    background-color: #FFFA;
 }
 
 /* ---------------------------------------- */

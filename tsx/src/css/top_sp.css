@@ -4,6 +4,44 @@
     display: flex;
     justify-content: center;
     padding: 20vw;
+    height: 200vw;
+    background: url("/imgs/lp.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 280vw;
+}
+
+.root .content {
+    display: block;
+    justify-content: center;
+}
+
+.root .title {
+    text-align: center;
+    color: #FFF;
+    padding: 3vw 0vw 0vw 0vw;
+    font-size: 20vw;
+    font-weight: 100;
+}
+
+.root .sub {
+    text-align: center;
+    color: #FFF;
+    padding: 3vw 0vw 20vw 0vw;
+    font-size: 7vw;
+    font-weight: 100;
+}
+
+.root .start {
+    text-align: center
+}
+
+.root .button {
+    padding: 3vw 2vw !important;
+    border: solid 2px !important;
+    border-radius: 2px !important;
+    font-size: 4vw !important;
+    background-color: #FFFA;
 }
 
 /* ---------------------------------------- */

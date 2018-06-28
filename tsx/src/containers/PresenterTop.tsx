@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import * as utility from '../modules/utility'
-import { HostHeader, BaseButton } from './Common'
+import { HostHeader, CustomButton } from './Common'
 
 import styles from './styles'
 
@@ -14,10 +14,20 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
         <div>
             <HostHeader />
             <div className={styles.top.root}>
-                <div>
-                    <BaseButton color="primary" onClick={props.onStart}>
-                        GET STARTED
-                    </BaseButton>
+                <div className={styles.top.content}>
+                    <div className={styles.top.title}>
+                        n0lendly
+                    </div>
+                    <div className={styles.top.sub}>
+                        Make your calender open to your friends.
+                    </div>
+                    <div className={styles.top.start}>
+                        <CustomButton color="primary" onClick={props.onStart}
+                            className={styles.top.button}>
+                            GET STARTED
+                        </CustomButton>
+                    </div>
+
                 </div>
             </div>
         </div>
