@@ -64,6 +64,18 @@ export const HostHeader: React.SFC<{}> = (props) => {
     )
 }
 
+export const HostFooter: React.SFC<{}> = (props) => {
+    return (
+        <div className={styles.common.hostFooter}>
+            <div className={styles.common.content}>
+                developed by <a href="/" onClick={() => window.location.href = "/"}>
+                    https://github.com/n0mimono
+                </a>.
+            </div>
+        </div>
+    )
+}
+
 interface TpProps {
 }
 

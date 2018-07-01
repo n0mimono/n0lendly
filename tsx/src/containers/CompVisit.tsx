@@ -236,13 +236,13 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
                 <div key={j} className={styles.visit.rowItem}>
                     {utility.toHourFormat(hour.time)}
                 </div>
-            )    
+            )
         }
     }
 
     for (let i = 0; i < table.days.length; i++) {
         let day = table.days[i]
-        if ((props.visibleWeek & 2**utility.weekIndex(day.time)) == 0) continue
+        if ((props.visibleWeek & 2 ** utility.weekIndex(day.time)) == 0) continue
 
         let xHour = []
         for (let j = 0; j < day.hours.length; j++) {
@@ -254,12 +254,12 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
                     <div className={styles.visit.hour}>
                         {
                             hour.isReserved ? undefined :
-                            <div className={styles.visit.nreserved}
-                                onClick={() => props.onItemClick(hour.time)}>
-                                <div>
-                                    {utility.toHourFormat(hour.time)}
+                                <div className={styles.visit.nreserved}
+                                    onClick={() => props.onItemClick(hour.time)}>
+                                    <div>
+                                        {utility.toHourFormat(hour.time)}
+                                    </div>
                                 </div>
-                            </div>
                         }
                     </div>
                 </div>
@@ -294,12 +294,14 @@ const CalenderBody: React.SFC<CalenderBodyProps> = (props) => {
 
     return (
         <div className={styles.visit.calenderBody}>
-            <div className={styles.visit.left}>
-                <div className={styles.visit.rowHead}></div>
-                {xTimes}
-            </div>
-            <div className={styles.visit.right}>
-                {xDays}
+            <div className={styles.visit.center}>
+                <div className={styles.visit.left}>
+                    <div className={styles.visit.rowHead}></div>
+                    {xTimes}
+                </div>
+                <div className={styles.visit.right}>
+                    {xDays}
+                </div>
             </div>
         </div>
     )
@@ -313,24 +315,26 @@ interface CalenderClickProps {
 const CalenderClick: React.SFC<CalenderClickProps> = (props) => {
     return (
         <div className={styles.visit.calenderClick}>
-            {
-                props.onLeftClick == undefined ? "" :
-                    <div className={styles.visit.left}>
-                        <CustomButton color="inherit" border={false} onClick={() => props.onLeftClick()}
-                            className={styles.visit.button}>
-                            {"<"}
-                        </CustomButton>
-                    </div>
-            }
-            {
-                props.onRightClick == undefined ? "" :
-                    <div className={styles.visit.right}>
-                        <CustomButton color="inherit" border={false} onClick={() => props.onRightClick()}
-                            className={styles.visit.button}>
-                            {">"}
-                        </CustomButton>
-                    </div>
-            }
+            <div className={styles.visit.center}>
+                {
+                    props.onLeftClick == undefined ? "" :
+                        <div className={styles.visit.left}>
+                            <CustomButton color="inherit" border={false} onClick={() => props.onLeftClick()}
+                                className={styles.visit.button}>
+                                {"<"}
+                            </CustomButton>
+                        </div>
+                }
+                {
+                    props.onRightClick == undefined ? "" :
+                        <div className={styles.visit.right}>
+                            <CustomButton color="inherit" border={false} onClick={() => props.onRightClick()}
+                                className={styles.visit.button}>
+                                {">"}
+                            </CustomButton>
+                        </div>
+                }
+            </div>
         </div>
     )
 }
@@ -354,7 +358,7 @@ export class VisitConfirm extends React.Component<VisitConfirmProps> {
 
     render() {
         let props = this.props
-        
+
         this.formSummary = props.initSummary
         this.formDescription = props.initDescription
 
@@ -362,7 +366,7 @@ export class VisitConfirm extends React.Component<VisitConfirmProps> {
             <div>
                 <SubHeader>Confirm Information</SubHeader>
                 <div className={styles.visit.confirm}>
-                    <SubPaper title="予約">
+                    <SubPaper title="予定">
                         <ConfirmForm
                             title={"日付"}
                             value={utility.toDateFullFormat(props.time)}
@@ -386,7 +390,7 @@ export class VisitConfirm extends React.Component<VisitConfirmProps> {
                             defaultValue={props.initDescription}
                         />
                     </SubPaper>
-                    <SubPaper title="詳細">
+                    <SubPaper title="登録">
                         <ConfirmForm
                             title={"名前"}
                             onChange={t => this.formName = t}
@@ -486,7 +490,7 @@ export const VisitResult: React.SFC<VisitResultProps> = (props) => {
             <div>
                 <SubHeader>Confirmed</SubHeader>
                 <div className={styles.visit.sub}>
-                    <SubPaper title="予定の確認">
+                    <SubPaper title="予定">
                         <ConfirmForm
                             title={""}
                             value={"カレンダーに予定が登録されました。"}
@@ -503,7 +507,7 @@ export const VisitResult: React.SFC<VisitResultProps> = (props) => {
                             disabled={true}
                         />
                     </SubPaper>
-                    <SubPaper title="次に">
+                    <SubPaper title="　">
                         <ResultMore description={props.nextGuide} />
                     </SubPaper>
                 </div>

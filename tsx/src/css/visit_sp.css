@@ -89,6 +89,11 @@
 }
 
 .subPaper .paper {
+    padding: 3vw;
+    box-shadow: 0px 0px 0px 0px !important;
+    border: solid 1px !important;
+    border-radius: 3px !important;
+    border-color: #BBB !important;
 }
 
 .subPaper .inner {
@@ -115,6 +120,11 @@
 /* ---------------------------------------- */
 
 .calenderBody {
+    display: flex;
+    justify-content: center;
+}
+
+.calenderBody .center {
     display: flex;
 }
 
@@ -225,6 +235,16 @@
 }
 
 .calenderBody .weekday {
+}
+
+.calenderClick {
+    display: flex;
+    justify-content: center;
+}
+
+.calenderClick .center {
+    height: 1vw;
+    width: 90vw;
 }
 
 .calenderClick .left {

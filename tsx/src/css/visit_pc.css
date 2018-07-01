@@ -90,6 +90,11 @@
 .subPaper .paper {
     width: 330px;
     height: 330px;
+    padding: 10px;
+    box-shadow: 0px 0px 0px 0px !important;
+    border: solid 1px !important;
+    border-radius: 3px !important;
+    border-color: #BBB !important;
 }
 
 .subPaper .inner {
@@ -118,7 +123,11 @@
 
 .calenderBody {
     display: flex;
-    padding: 0px 0px 130px 0px;
+    justify-content: center;
+}
+
+.calenderBody .center {
+    display: flex;
 }
 
 .calenderBody .left {
@@ -235,9 +244,19 @@
     height: 0;
 }
 
+.calenderClick {
+    display: flex;
+    justify-content: center;
+}
+
+.calenderClick .center {
+    height: 1px;
+    width: 350px;
+}
+
 .calenderClick .left .button {
     padding: 10px 10px;
-    top: -40px;
+    top: -52px;
     left: 0px;
 }
 
@@ -249,7 +268,7 @@
 
 .calenderClick .right .button {
     padding: 10px 10px;
-    top: -40px;
+    top: -52px;
     right: 0px;
 }
 

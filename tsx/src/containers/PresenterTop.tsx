@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import * as utility from '../modules/utility'
-import { HostHeader, CustomButton } from './Common'
+import { HostHeader, CustomButton, HostFooter } from './Common'
 
 import styles from './styles'
 
@@ -27,9 +27,9 @@ export const Presenter: React.SFC<PresenterProps> = (props) => {
                             GET STARTED
                         </CustomButton>
                     </div>
-
                 </div>
             </div>
+            <HostFooter />
         </div>
     )
 }

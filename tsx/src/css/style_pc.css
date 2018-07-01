@@ -33,6 +33,19 @@
     padding: 30px;
 }
 
+.hostFooter {
+    background-color: #FFF;
+    bottom: 0;
+    width: 100%;
+}
+
+.hostFooter .content {
+    border-top: solid 1px #EEE;
+    text-align: center;
+    font-size: 14px;
+    padding: 30px;
+}
+
 .tp {
     padding: 5px 10px;
 }

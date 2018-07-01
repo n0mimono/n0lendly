@@ -37,6 +37,19 @@
     padding: 8vw;
 }
 
+.hostFooter {
+    background-color: #FFF;
+    width: 100%;
+    padding: 4vw 0vw 0vw 0vw;
+}
+
+.hostFooter .content {
+    border-top: solid 1px #EEE;
+    text-align: center;
+    font-size: 2vw;
+    padding: 2vw;
+}
+
 .tp {
     padding: 5px 10px;
 }

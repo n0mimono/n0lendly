@@ -98,6 +98,12 @@
     font-weight: 600;
 }
 
+.miniBlock .line {
+    height: 1px;
+    margin: 10vw 1vw 3vw 1vw;
+    border-bottom: solid 1px #DDD;
+}
+
 .baseInfoItem {
     display: flex;
     align-items: center;

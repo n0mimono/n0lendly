@@ -149,7 +149,7 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
                 window.clearTimeout(form.timerId)
                 dispatch(Dashboard.actions.updateAddress({
                     ...form,
-                    warning: r.success ? '登録されました。' : '無効なリンクです。'
+                    warning: r.success ? '登録しました。' : '無効なリンクです。'
                 }))
             })
         },
@@ -165,7 +165,7 @@ function mapDispatchToProps(dispatch: Dispatch<void>) {
 
                 dispatch(Dashboard.actions.updateSetting({
                     ...form,
-                    warning: r.success ? '登録されました。' : '無効な設定です。'
+                    warning: r.success ? '登録しました。' : '無効な設定です。'
                 }))
             })
         },

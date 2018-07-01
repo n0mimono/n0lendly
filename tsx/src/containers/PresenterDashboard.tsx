@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { HostHeader, Tp } from './Common'
+import { HostHeader, Tp, HostFooter } from './Common'
 
 import * as Dashboard from '../modules/dashboard'
 
@@ -59,7 +59,7 @@ export const MainPage: React.SFC<MainPageProps> = (props) => {
                 </Block>
 
                 <Block title={"リンク管理"}>
-                    <MiniBlock title={"リンクの変更"}>
+                    <MiniBlock title={"リンクの変更"} withLine={true}>
                         <LinkUpdate form={props.addressForm} />
                     </MiniBlock>
                     <MiniBlock title={"設定の変更"}>
@@ -73,6 +73,7 @@ export const MainPage: React.SFC<MainPageProps> = (props) => {
                     </MiniBlock>
                 </Block>
             </Blocks>
+            <HostFooter />
         </div>
     )
 }

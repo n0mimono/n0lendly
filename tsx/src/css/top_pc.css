@@ -8,6 +8,7 @@
     height: 600px;
     background-repeat: no-repeat;
     background-position: center top;
+    background-size: 1200px;
 }
 
 .root .content {
@@ -36,10 +37,11 @@
 }
 
 .root .button {
-    padding: 10px 20px !important;
-    border: solid 2px !important;
-    border-radius: 2px !important;
-    background-color: #FFFA;
+    padding: 15px 25px !important;
+    border: solid 4px !important;
+    border-radius: 10px !important;
+    background-color: #FFFC;
+    font-size: 18px;
 }
 
 /* ---------------------------------------- */

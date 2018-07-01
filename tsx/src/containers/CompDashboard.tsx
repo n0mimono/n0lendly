@@ -187,6 +187,7 @@ export const Block: React.SFC<BlockProps> = (props) => {
 
 interface MiniBlockProps {
     title: string
+    withLine?: boolean
 }
 
 export const MiniBlock: React.SFC<MiniBlockProps> = (props) => {
@@ -198,6 +199,10 @@ export const MiniBlock: React.SFC<MiniBlockProps> = (props) => {
             <div>
                 {props.children}
             </div>
+            {   !props.withLine ? "" :
+                <div className={styles.dashboard.line}>
+                </div>
+            }
         </div>
     )
 }
